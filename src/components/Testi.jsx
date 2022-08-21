@@ -8,43 +8,22 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
             
 const TestiModule = () => {
-
-    var settings = {
-        className: "slider variable-width",
-        dots: true,
-        arrows:true,
+    const settings = {
         infinite: true,
-        centerMode: true,
-        slidesToShow: 3,
+        speed: 500,
         slidesToScroll: 1,
         variableWidth: true,
+        centerMode: true,
         responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-                dots: true
-              }
-            },
-            {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                initialSlide: 2
-              }
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
+          {
+            breakpoint: 600,
+            settings: {
+              variableWidth: false,
+              centerMode: false
             }
+          }
         ]
-    };
+      };
 
     return (
         <div>
@@ -55,37 +34,14 @@ const TestiModule = () => {
             <div className='fixedHeight'>
                 <Slider {...settings}>
                     <div>
-                        <div style={{width:640}} className="item">
+                        <div className='item'>
                             <Row className="itemitem align-items-center">
-                                <Col md="3">
+                                <Col md="3" className='cardhead'>
                                     <img src={img_testi} className="card-img" alt="foto" style={{height:"80px", width:"80px"}}/>
                                 </Col>
                                 <Col md="9" className="card-text">
                                     <br/>
-                                    <img src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
-                                    <br/>
-                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-                                        eiusmod lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                        sed do eiusmod lorem ipsum dolor sit amet, consectetur adipiscing 
-                                        elit, sed do eiusmod"</p>
-                                    <p><small className="text-card2">John Dee 32, Bromo</small></p>
-                                </Col>
-                            </Row>
-                        </div>
-                    </div>
-
-                    <div className='spacing'>
-                    </div>
-
-                    <div>
-                        <div style={{width:640}} className="item">
-                            <Row className="itemitem align-items-center">
-                                <Col md="3">
-                                    <img src={img_testi} className="card-img" alt="foto" style={{height:"80px", width:"80px"}}/>
-                                </Col>
-                                <Col md="9" className="card-text">
-                                    <br/>
-                                    <img src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
+                                    <img className='five' src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
                                     <br/>
                                     <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
                                         eiusmod lorem ipsum dolor sit amet, consectetur adipiscing elit, 
@@ -97,14 +53,14 @@ const TestiModule = () => {
                         </div>
                     </div>
                     <div>
-                        <div style={{width:640}} className="item">
+                        <div className="item">
                             <Row className="itemitem align-items-center">
-                                <Col md="3">
+                                <Col md="3" className='cardhead'>
                                     <img src={img_testi} className="card-img" alt="foto" style={{height:"80px", width:"80px"}}/>
                                 </Col>
                                 <Col md="9" className="card-text">
                                     <br/>
-                                    <img src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
+                                    <img className='five' src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
                                     <br/>
                                     <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
                                         eiusmod lorem ipsum dolor sit amet, consectetur adipiscing elit, 
@@ -116,14 +72,109 @@ const TestiModule = () => {
                         </div>
                     </div>
                     <div>
-                        <div style={{width:640}} className="item">
+                        <div className="item">
                             <Row className="itemitem align-items-center">
-                                <Col md="3">
+                                <Col md="3" className='cardhead'>
                                     <img src={img_testi} className="card-img" alt="foto" style={{height:"80px", width:"80px"}}/>
                                 </Col>
                                 <Col md="9" className="card-text">
                                     <br/>
-                                    <img src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
+                                    <img className='five' src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
+                                    <br/>
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+                                        eiusmod lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                        sed do eiusmod lorem ipsum dolor sit amet, consectetur adipiscing 
+                                        elit, sed do eiusmod"</p>
+                                    <p><small className="text-card2">John Dee 32, Bromo</small></p>
+                                </Col>
+                            </Row>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="item">
+                            <Row className="itemitem align-items-center">
+                                <Col md="3" className='cardhead'>
+                                    <img src={img_testi} className="card-img" alt="foto" style={{height:"80px", width:"80px"}}/>
+                                </Col>
+                                <Col md="9" className="card-text">
+                                    <br/>
+                                    <img className='five' src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
+                                    <br/>
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+                                        eiusmod lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                        sed do eiusmod lorem ipsum dolor sit amet, consectetur adipiscing 
+                                        elit, sed do eiusmod"</p>
+                                    <p><small className="text-card2">John Dee 32, Bromo</small></p>
+                                </Col>
+                            </Row>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="item">
+                            <Row className="itemitem align-items-center">
+                                <Col md="3" className='cardhead'>
+                                    <img src={img_testi} className="card-img" alt="foto" style={{height:"80px", width:"80px"}}/>
+                                </Col>
+                                <Col md="9" className="card-text">
+                                    <br/>
+                                    <img className='five' src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
+                                    <br/>
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+                                        eiusmod lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                        sed do eiusmod lorem ipsum dolor sit amet, consectetur adipiscing 
+                                        elit, sed do eiusmod"</p>
+                                    <p><small className="text-card2">John Dee 32, Bromo</small></p>
+                                </Col>
+                            </Row>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="item">
+                            <Row className="itemitem align-items-center">
+                                <Col md="3" className='cardhead'>
+                                    <img src={img_testi} className="card-img" alt="foto" style={{height:"80px", width:"80px"}}/>
+                                </Col>
+                                <Col md="9" className="card-text">
+                                    <br/>
+                                    <img className='five' src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
+                                    <br/>
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+                                        eiusmod lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                        sed do eiusmod lorem ipsum dolor sit amet, consectetur adipiscing 
+                                        elit, sed do eiusmod"</p>
+                                    <p><small className="text-card2">John Dee 32, Bromo</small></p>
+                                </Col>
+                            </Row>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="item">
+                            <Row className="itemitem align-items-center">
+                                <Col md="3" className='cardhead'>
+                                    <img src={img_testi} className="card-img" alt="foto" style={{height:"80px", width:"80px"}}/>
+                                </Col>
+                                <Col md="9" className="card-text">
+                                    <br/>
+                                    <img className='five' src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
+                                    <br/>
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+                                        eiusmod lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                        sed do eiusmod lorem ipsum dolor sit amet, consectetur adipiscing 
+                                        elit, sed do eiusmod"</p>
+                                    <p><small className="text-card2">John Dee 32, Bromo</small></p>
+                                </Col>
+                            </Row>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="item">
+                            <Row className="itemitem align-items-center">
+                                <Col md="3" className='cardhead'>
+                                    <img src={img_testi} className="card-img" alt="foto" style={{height:"80px", width:"80px"}}/>
+                                </Col>
+                                <Col md="9" className="card-text">
+                                    <br/>
+                                    <img className='five' src={button_5stars} style={{marginLeft:"-3px"}} alt="5stars"/>
                                     <br/>
                                     <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
                                         eiusmod lorem ipsum dolor sit amet, consectetur adipiscing elit, 
