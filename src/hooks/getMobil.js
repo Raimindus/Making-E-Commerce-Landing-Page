@@ -14,25 +14,15 @@ const GetMobil = () => {
     const response = await getBinarApi();
 
     const resultAll = response.data;
+  
+    const filtered = resultAll
+    .filter(x => x.name == (nama == '' ? x.name : nama))
+    .filter(y => y.category == (selectedKategori == '' ? y.category : selectedKategori))
+    .filter(z => z.price == (selectedHarga == '' ? z.price : selectedHarga))
+    setBinar(filtered);
 
-    if (selectedKategori) {
-      const hasil = selectedKategori.value
-      ? resultAll.filter((value) => {
-        const kategori = value.category;
-        return kategori.includes(selectedKategori.value);
-        })
-      :resultAll;
-      
-      setBinar(hasil);
+  }
 
-    } 
-
-      else {
-      return setBinar(resultAll);
-
-    }
-
-  };
   return {search, nama, setNama, selectedHarga, setSelectedHarga, selectedKategori, setSelectedKategori, binar, setBinar };
 };
 

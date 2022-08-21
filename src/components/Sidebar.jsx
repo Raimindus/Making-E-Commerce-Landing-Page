@@ -91,10 +91,15 @@ class SideBar extends React.Component {
                     </Col>
                     <Menu right styles={styles} isOpen={this.state.menuOpen}
                      onStateChange={(state) => this.handleStateChange(state)}>
-                        <HashLink onClick={() => this.closeMenu()} id="services" className="menu-item text-decoration-none" Smooth to="/#services">Our Services</HashLink>
-                        <HashLink onClick={() => this.closeMenu()} id="about" className="menu-item text-decoration-none" Smooth to="/#about">Why Us</HashLink>
-                        <HashLink onClick={() => this.closeMenu()} id="testi" className="menu-item text-decoration-none" Smooth to="/#testi">Testimonial</HashLink>
-                        <HashLink onClick={() => this.closeMenu()} id="faq" className="menu-item text-decoration-none" Smooth to="/#faq">FAQ</HashLink>
+                        <h3 style={{color:'black', fontWeight:'700'}}>BCR</h3>
+                        <br/><br/>
+                        <HashLink style={{color:'black'}} onClick={() => this.closeMenu()} id="services" className="menu-item text-decoration-none" Smooth to="/#services">Our Services</HashLink>
+                        <br/><br/>
+                        <HashLink style={{color:'black'}} onClick={() => this.closeMenu()} id="about" className="menu-item text-decoration-none" Smooth to="/#about">Why Us</HashLink>
+                        <br/><br/>
+                        <HashLink style={{color:'black'}} onClick={() => this.closeMenu()} id="testi" className="menu-item text-decoration-none" Smooth to="/#testi">Testimonial</HashLink>
+                        <br/><br/>
+                        <HashLink style={{color:'black'}} onClick={() => this.closeMenu()} id="faq" className="menu-item text-decoration-none" Smooth to="/#faq">FAQ</HashLink>
                     </Menu>
                 </Row>
             </Container>

@@ -31,7 +31,7 @@ const FooterModule = () => {
                         <HashLink className='text-decoration-none' style={{color:'black'}} smooth to='/#testi'>
                             <p>Testimonials</p>
                         </HashLink>
-                        <HashLink className='text-decoration-none' style={{color:'black'}} smooth to='/faq'>
+                        <HashLink className='text-decoration-none' style={{color:'black'}} smooth to='/#faq'>
                             <p>FAQ</p>
                         </HashLink>
                     </div>   
