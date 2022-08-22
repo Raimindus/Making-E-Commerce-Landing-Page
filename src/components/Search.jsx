@@ -20,13 +20,9 @@ const SearchModule = () => {
     ]
 
     const harga = [
-        {value: 5000000, label:'5.000.000'},
-        {value: 7000000, label:'7.000.000'},
-        {value: 400000, label:'400.000'},
-        {value: 350000, label:'350.000'},
-        {value: 400000, label:'400.000'},
-        {value: 500000, label:'500.000'},
-        {value: 1000000, label:'1.000.000'},
+        {value: [0, 400000], label:'< Rp.400.000'},
+        {value: [400000, 600000], label:'Rp.400.000-Rp.600.000'},
+        {value: [600000, 10000000], label:'> Rp.600.000'},
     ]
 
     const status = [
