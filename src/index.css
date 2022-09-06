@@ -419,9 +419,6 @@ li {
   line-height: 20px;
   color: black;
 }
-.slick-slide {
-
-}
 
 .slick-slider {
   width:100%;
@@ -444,8 +441,6 @@ li {
   right: 3% !important;
   z-index: 1;
 }
-
-.buttonSized {}
 
 .cardWhy {
   width:268px;
@@ -475,4 +470,8 @@ li {
   .hideSidebar {
     display:none;
   }
+}
+
+.signInRight {
+  background-color: #0D28A6;
 }

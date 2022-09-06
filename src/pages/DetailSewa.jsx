@@ -2,12 +2,16 @@ import React, {useEffect, useState} from 'react';
 import HeaderModule from '../components/Header';
 import FooterModule from '../components/Footer';
 import SearchModule from '../components/Search';
-import { Container, Row, Col, Card, CardBody } from 'reactstrap';
+import { Container, Row, Col, Card, CardBody, Button } from 'reactstrap';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { getBinarById } from '../services/MobilApi';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const DetailSewa = () => {
+    const [startDate, setStartDate] = useState(new Date());
+
+
     const [detailMobil, setDetailMobil] = useState();
     const {binarId} = useParams();
 
@@ -70,9 +74,12 @@ const DetailSewa = () => {
                             <CardBody>
                                 <img alt='detil mobil' src={detailMobil.image} style={{width:'100%'}}/>
                                 <div>
-                                    <p>Innova</p>
+                                    <p>{detailMobil.name}</p>
                                     <p>{detailMobil.category}</p>
-                                    <br/><br/><br/>
+                                    <br/>
+                                    <label for='datePicker'>Tentukan lama sewa mobil (max. 7 hari)</label>
+                                    <DatePicker id='datePicker' selected={startDate} onChange={(date) => setStartDate(date)} />
+                                    <br/><br/>
                                     <Container fluid style={{display:'flex', justifyContent:'space-between'}}>
                                         <div>
                                             <p>Total</p>
@@ -81,8 +88,9 @@ const DetailSewa = () => {
                                             <p>Rp. {detailMobil.price}</p>
                                         </div>
                                     </Container>
-                                    <br/><br/><br/>
+                                    <br/>
                                 </div>
+                                <Button className='dropdown' style={{width:'100%', height:'40px', borderRadius:'2px', backgroundColor:'#5CB85F', borderColor:'transparent'}}>Lanjutkan Pembayaran</Button>
                             </CardBody>
                         </Card>
                     </Col>
