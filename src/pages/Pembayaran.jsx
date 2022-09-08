@@ -76,7 +76,6 @@ const Pembayaran = () => {
                   <p>{detailMobil.category}</p>
                 </CardBody>
               </Card>
-
             </Col>
           </Row>
         </Container>
