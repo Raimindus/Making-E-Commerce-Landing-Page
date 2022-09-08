@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardBody, Container } from 'reactstrap'
+import { Card, CardBody, Col, Container, Row } from 'reactstrap'
 import FooterModule from '../components/Footer'
 import HeaderModule from '../components/Header'
 import icon_success from '../assets/image/icon_success.png';
@@ -11,17 +11,25 @@ const Etiket = () => {
     <div>
       <HeaderModule/>
       <br/><br/>
-        <Container>
+        <Container >
           <div className='text-center'>
             <img src={icon_success} alt='success' />
+            <br/><br/>
             <h3>Pembayaran Berhasil!</h3>
             <p>Tunjukkan invoice ini ke petugas BCR di titik temu.</p>
           </div>
-          <Card>
+          <Card style={{width:'50%', margin:'auto'}}>
             <CardBody>
-              <h3>Invoice</h3>
-              <p>*no invoice</p>
-              <img src={button_download} alt='download' />
+              <Container style={{display:'flex', justifyContent:'space-between'}}>
+                <div>
+                    <h3>Invoice</h3>
+                    <p>*no invoice</p>
+                </div>
+                <div>
+                <img src={button_download} alt='download' />
+                </div>
+              </Container>
+
             </CardBody>
           </Card>
         </Container>

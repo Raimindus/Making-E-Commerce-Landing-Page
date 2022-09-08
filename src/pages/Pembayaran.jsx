@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import HeaderModule from '../components/Header'
 import FooterModule from '../components/Footer'
-import { Card, Row, Col, Container, CardBody } from 'reactstrap'
+import { Card, Row, Col, Container, CardBody, Button } from 'reactstrap'
 import {getBinarById } from '../services/MobilApi'
 import { useParams } from 'react-router-dom';
 
@@ -56,24 +56,52 @@ const Pembayaran = () => {
                 <CardBody>
                   <p className='dropdown'>Pilih Bank Transfer</p>
                   <p>Kamu bisa membayar dengan transfer melalui ATM, Internet Banking atau Mobile Banking</p>
-                  <div>
+                  <Row>
+                    <Card style={{width:'61px', height:'30px', paddingLeft:''}}>
+                        BCA
+                    </Card>
                     BCA Transfer
-                  </div>
-                  <div>
+                  </Row>
+                  <br/>
+                  <Row>
+                    <Card style={{width:'61px', height:'30px', paddingLeft:''}}>
+                        BNI
+                    </Card>
                     BNI Transfer
-                  </div>
-                  <div>
+                  </Row>
+                  <br/>
+                  <Row>
+                    <Card style={{width:'61px', height:'30px', paddingLeft:''}}>
+                        Mandiri
+                    </Card>
                     Mandiri Transfer
-                  </div>
+                  </Row>
                 </CardBody>
               </Card>
             </Col>
             <Col md={5}>
               <Card>
                 <CardBody>
-                  <img alt='detil mobil' src={detailMobil.image} style={{width:'100%'}}/>
                   <p>{detailMobil.name}</p>
                   <p>{detailMobil.category}</p>
+                  <p>Harga</p>
+                  <ul>
+                    <li>Sewa Mobil</li>
+                  </ul>
+                  <p>Biaya Lainnya</p>
+                  <ul>
+                    <li>Pajak</li>
+                    <li>Biaya makan sopir</li>
+                  </ul>
+                  <p>Belum Termasuk</p>
+                  <ul>
+                    <li>Bensin</li>
+                    <li>Tol dan parkir</li>
+                  </ul>
+                  <br/>
+                  <p>Total</p>
+                  <br/>
+                  <button style={{width:'100%'}} className='button1 shadow'>Bayar</button>
                 </CardBody>
               </Card>
             </Col>
