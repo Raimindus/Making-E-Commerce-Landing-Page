@@ -6,7 +6,7 @@ import GetMobil from '../hooks/getMobil';
 import {Container, Card, CardBody, CardTitle, CardText, CardSubtitle, CardImg, Col, Row, Button } from 'reactstrap';
 import {useNavigate} from 'react-router-dom';
 
-const SearchModule = () => {
+const SearchModule = (disabled) => {
 
     const navigate = useNavigate();
 
@@ -42,7 +42,8 @@ const SearchModule = () => {
                                 onChange = {(e) => {
                                     setNama(e.target.value);
                                 }}
-                                 type="text" className="namamobil searchform" id="namaMobil" placeholder="Ketik nama/tipe mobil"/>
+                                 type="text"
+                                 className="namamobil searchform" id="namaMobil" placeholder="Ketik nama/tipe mobil"/>
                             </Col>
                             <Col md="3" pe="0">
                                 <label className="labelsearch" for="kategori">Kategori</label><br/>

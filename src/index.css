@@ -178,7 +178,7 @@ li {
 }
 
 .list2 {
-  list-style-image: url(../../assets/image/icon_checklist.png);
+  list-style-image: url(../src/assets/image/icon_checklist.png);
   padding: 0em 0 .8em 14px;
 }
 
