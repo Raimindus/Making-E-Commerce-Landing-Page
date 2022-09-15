@@ -6,8 +6,8 @@ import GetMobil from '../hooks/getMobil';
 import {Container, Card, CardBody, CardTitle, CardText, CardSubtitle, CardImg, Col, Row, Button } from 'reactstrap';
 import {useNavigate} from 'react-router-dom';
 
-const SearchModule = (disabled) => {
-
+const SearchModule = (props) => {
+    const {disabled} = props;
     const navigate = useNavigate();
 
     const {search, nama, setNama, selectedHarga, setSelectedHarga, selectedKategori, setSelectedKategori, binar, setBinar } =
@@ -43,6 +43,7 @@ const SearchModule = (disabled) => {
                                     setNama(e.target.value);
                                 }}
                                  type="text"
+                                 disabled= {disabled}
                                  className="namamobil searchform" id="namaMobil" placeholder="Ketik nama/tipe mobil"/>
                             </Col>
                             <Col md="3" pe="0">
@@ -51,6 +52,7 @@ const SearchModule = (disabled) => {
                                 onChange = {(e) => {
                                     setSelectedKategori(e.value);
                                 }}
+                                isDisabled = {disabled}
                                 options={options} name='kategori' id='kategori' placeholder='Masukan kapasitas mobil' className='namamobil'/>
                             </Col>
                             <Col md="3" pe="0">
@@ -59,16 +61,17 @@ const SearchModule = (disabled) => {
                                 onChange = {(e) => {
                                     setSelectedHarga(e.value);
                                 }}
+                                isDisabled = {disabled}
                                 options={harga} name='harga' id="harga" placeholder='Masukan harga sewa perhari' className='namamobil'/>
                             </Col>
                             <Col md="3" pe="0">
                                 <label className="labelsearch" for="status">Status</label><br/>
-                                <Select options={status} name='status' id="status" placeholder='Disewa' className='namamobil'/>
+                                <Select options={status} isDisabled = {disabled} name='status' id="status" placeholder='Disewa' className='namamobil'/>
                             </Col>
                         </Row>
                     </Col>
                     <Col md="1" style={{paddingTop:"16px"}}>
-                        <button onClick={search} type="button" className="button2 shadow">Cari Mobil</button>
+                        <button disabled= {disabled} onClick={search} type="button" className="button2 shadow">Cari Mobil</button>
                     </Col>
                 </Row>
             </Container>

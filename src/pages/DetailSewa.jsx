@@ -31,7 +31,7 @@ const DetailSewa = () => {
         <div style={{height:'200px', backgroundColor:'#F1F3FF',position:'relative', zIndex:'-2'}}>
 
         </div>
-        <SearchModule disabled/>
+        <SearchModule disabled={true}/>
             <Container>
                 <Row>
                     <Col md={7}>

@@ -8,6 +8,7 @@ import DetailSewa from './pages/DetailSewa';
 import SignIn from './pages/SignIn';
 import Pembayaran from './pages/Pembayaran';
 import Etiket from './pages/Etiket';
+import SignUp from './pages/SignUp';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/SignIn' element={<SignIn/>} />
           <Route path='/Pembayaran/:binarId' element={<Pembayaran/>} />
           <Route path='/Etiket' element={<Etiket/>} />
+          <Route path='/SignUp' element={<SignUp/>} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -475,3 +475,11 @@ li {
 .signInRight {
   background-color: #0D28A6;
 }
+
+button:disabled {
+  display:none;
+}
+
+input:disabled {
+  background-color: #D0D0D0;
+}
