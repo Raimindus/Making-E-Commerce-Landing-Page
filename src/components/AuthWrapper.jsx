@@ -9,7 +9,6 @@ function AuthWrapper({ children }) {
   const matched = matchPath({ path: '/DetailSewa/:binarId' }, pathname);
 
   useEffect(() => {
-    console.log(matched);
     if (pathname !== '/SignIn' && pathname !== '/SignUp' && pathname !== '/' && pathname !== '/CariMobil' && !matched) {
       const authData = JSON.parse(localStorage.getItem('auth'));
       if (!authData?.access_token) {
