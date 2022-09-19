@@ -1,12 +1,12 @@
 import '../index.css';
 
 import React from 'react';
+import { Img } from 'react-image';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import {
   Card,
   CardBody,
-  CardImg,
   CardSubtitle,
   CardText,
   CardTitle,
@@ -15,6 +15,7 @@ import {
   Row
 } from 'reactstrap';
 
+import placeholderImg from '../assets/image/placeholderImg.jpg';
 import GetMobil from '../hooks/getMobil';
 
 function SearchModule(props) {
@@ -139,12 +140,12 @@ function SearchModule(props) {
             {binar.map((car) => (
               <Col lg={4} key={car.id}>
                 <Card style={{ height: '478px' }} className="mb-4">
-                  <CardImg
-                    alt="Card image cap"
-                    src={car.image}
+                  <Img
+                    alt="Car"
+                    src={[car.image, placeholderImg]}
                     top
                     width="100%"
-                    style={{ paddingBottom: '0px' }}
+                    style={{ paddingBottom: '0px'}}
                   />
                   <CardBody className="shadow pb-0">
                     <CardTitle className="headertext" tag="h5">

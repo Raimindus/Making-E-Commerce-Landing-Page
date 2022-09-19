@@ -50,7 +50,7 @@ function SignIn() {
 
                   localStorage.setItem("auth", JSON.stringify(res.data));
 
-                  navigate("/");
+                  navigate(-1);
                 } catch (e) {
                   console.error(e);
                 }
