@@ -4,6 +4,7 @@ import './index.css';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import AuthWrapper from './components/AuthWrapper';
 import CariMobil from './pages/CariMobil';
 import DetailSewa from './pages/DetailSewa';
 import Etiket from './pages/Etiket';
@@ -16,15 +17,17 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/CariMobil" element={<CariMobil />} />
-          <Route path="/DetailSewa/:binarId" element={<DetailSewa />} />
-          <Route path="/SignIn" element={<SignIn />} />
-          <Route path="/Pembayaran/:binarId" element={<Pembayaran />} />
-          <Route path="/Etiket" element={<Etiket />} />
-          <Route path="/SignUp" element={<SignUp />} />
-        </Routes>
+        <AuthWrapper>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/CariMobil" element={<CariMobil />} />
+            <Route path="/DetailSewa/:binarId" element={<DetailSewa />} />
+            <Route path="/SignIn" element={<SignIn />} />
+            <Route path="/Pembayaran/:binarId" element={<Pembayaran />} />
+            <Route path="/Etiket/:binarId" element={<Etiket />} />
+            <Route path="/SignUp" element={<SignUp />} />
+          </Routes>
+        </AuthWrapper>
       </BrowserRouter>
     </div>
   );

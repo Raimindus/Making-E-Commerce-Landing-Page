@@ -1,17 +1,18 @@
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
-import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-import { useParams } from "react-router-dom";
-import { Button, Card, CardBody, Col, Container, Row } from "reactstrap";
+import React, { useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Card, CardBody, Col, Container, Row } from 'reactstrap';
 
-import FooterModule from "../components/Footer";
-import HeaderModule from "../components/Header";
-import SearchModule from "../components/Search";
-import { getBinarById } from "../services/MobilApi";
+import FooterModule from '../components/Footer';
+import HeaderModule from '../components/Header';
+import SearchModule from '../components/Search';
+import { getBinarById } from '../services/MobilApi';
 
 function DetailSewa() {
   const [startDate, setStartDate] = useState(new Date());
+  const navigate = useNavigate();
 
   const [detailMobil, setDetailMobil] = useState();
   const { binarId } = useParams();
@@ -31,10 +32,10 @@ function DetailSewa() {
       <HeaderModule />
       <div
         style={{
-          height: "200px",
-          backgroundColor: "#F1F3FF",
-          position: "relative",
-          zIndex: "-2",
+          height: '200px',
+          backgroundColor: '#F1F3FF',
+          position: 'relative',
+          zIndex: '-2'
         }}
       />
       <SearchModule disabled />
@@ -95,7 +96,7 @@ function DetailSewa() {
                 <img
                   alt="detil mobil"
                   src={detailMobil.image}
-                  style={{ width: "100%" }}
+                  style={{ width: '100%' }}
                 />
                 <div>
                   <p>{detailMobil.name}</p>
@@ -113,7 +114,7 @@ function DetailSewa() {
                   <br />
                   <Container
                     fluid
-                    style={{ display: "flex", justifyContent: "space-between" }}
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
                   >
                     <div>
                       <p>Total</p>
@@ -127,11 +128,14 @@ function DetailSewa() {
                 <Button
                   className="dropdown"
                   style={{
-                    width: "100%",
-                    height: "40px",
-                    borderRadius: "2px",
-                    backgroundColor: "#5CB85F",
-                    borderColor: "transparent",
+                    width: '100%',
+                    height: '40px',
+                    borderRadius: '2px',
+                    backgroundColor: '#5CB85F',
+                    borderColor: 'transparent'
+                  }}
+                  onClick={() => {
+                    navigate(`/Pembayaran/${detailMobil.id}`);
                   }}
                 >
                   Lanjutkan Pembayaran

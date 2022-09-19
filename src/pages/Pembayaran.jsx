@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Card, CardBody, Col, Container, Row } from "reactstrap";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
-import FooterModule from "../components/Footer";
-import HeaderModule from "../components/Header";
-import { getBinarById } from "../services/MobilApi";
+import FooterModule from '../components/Footer';
+import HeaderModule from '../components/Header';
+import { getBinarById } from '../services/MobilApi';
 
 function Pembayaran() {
   const [detailMobil, setDetailMobil] = useState();
   const { binarId } = useParams();
+  const navigate = useNavigate();
 
   const getDetailSewa = async () => {
     const res = await getBinarById(binarId);
@@ -22,17 +23,17 @@ function Pembayaran() {
   if (!detailMobil) return <div>Loading...</div>;
 
   return (
-    <div style={{ margin: "auto" }}>
+    <div style={{ margin: 'auto' }}>
       <HeaderModule />
       <div
         style={{
-          height: "200px",
-          backgroundColor: "#F1F3FF",
-          position: "relative",
-          zIndex: "-2",
+          height: '200px',
+          backgroundColor: '#F1F3FF',
+          position: 'relative',
+          zIndex: '-2'
         }}
       />
-      <Container style={{ marginTop: "-50px" }}>
+      <Container style={{ marginTop: '-50px' }}>
         <Card>
           <CardBody>
             <p className="dropdown">Detail Pesananmu</p>
@@ -71,7 +72,7 @@ function Pembayaran() {
                 </p>
                 <Row>
                   <Card
-                    style={{ width: "61px", height: "30px", paddingLeft: "" }}
+                    style={{ width: '61px', height: '30px', paddingLeft: '' }}
                   >
                     BCA
                   </Card>
@@ -80,7 +81,7 @@ function Pembayaran() {
                 <br />
                 <Row>
                   <Card
-                    style={{ width: "61px", height: "30px", paddingLeft: "" }}
+                    style={{ width: '61px', height: '30px', paddingLeft: '' }}
                   >
                     BNI
                   </Card>
@@ -89,7 +90,7 @@ function Pembayaran() {
                 <br />
                 <Row>
                   <Card
-                    style={{ width: "61px", height: "30px", paddingLeft: "" }}
+                    style={{ width: '61px', height: '30px', paddingLeft: '' }}
                   >
                     Mandiri
                   </Card>
@@ -120,7 +121,14 @@ function Pembayaran() {
                 <br />
                 <p>Total</p>
                 <br />
-                <button type="button" style={{ width: "100%" }} className="button1 shadow">
+                <button
+                  onClick={() => {
+                    navigate(`/Etiket/${detailMobil.id}`);
+                  }}
+                  type="button"
+                  style={{ width: '100%' }}
+                  className="button1 shadow"
+                >
                   Bayar
                 </button>
               </CardBody>

@@ -1,8 +1,8 @@
-import "../index.css";
+import '../index.css';
 
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import Select from "react-select";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 import {
   Card,
   CardBody,
@@ -12,54 +12,49 @@ import {
   CardTitle,
   Col,
   Container,
-  Row,
-} from "reactstrap";
+  Row
+} from 'reactstrap';
 
-import GetMobil from "../hooks/getMobil";
+import GetMobil from '../hooks/getMobil';
 
 function SearchModule(props) {
   const { disabled } = props;
   const navigate = useNavigate();
 
-  const {
-    search,
-    setNama,
-    setSelectedHarga,
-    setSelectedKategori,
-    binar,
-  } = GetMobil();
+  const { search, setNama, setSelectedHarga, setSelectedKategori, binar } =
+    GetMobil();
 
   const options = [
-    { value: "2 - 4 orang", label: "2 - 4 orang" },
-    { value: "4 - 6 orang", label: "4 - 6 orang" },
-    { value: "6 - 8 orang", label: "6 - 8 orang" },
+    { value: '2 - 4 orang', label: '2 - 4 orang' },
+    { value: '4 - 6 orang', label: '4 - 6 orang' },
+    { value: '6 - 8 orang', label: '6 - 8 orang' }
   ];
 
   const harga = [
-    { value: [0, 400000], label: "< Rp.400.000" },
-    { value: [400000, 600000], label: "Rp.400.000-Rp.600.000" },
-    { value: [600000, 10000000], label: "> Rp.600.000" },
+    { value: [0, 400000], label: '< Rp.400.000' },
+    { value: [400000, 600000], label: 'Rp.400.000-Rp.600.000' },
+    { value: [600000, 10000000], label: '> Rp.600.000' }
   ];
 
-  const status = [{ value: "false", label: "Disewa" }];
+  const status = [{ value: 'false', label: 'Disewa' }];
 
   return (
     <div>
       <div>
         <Container
           className="shadow text-center searchbar px-0"
-          style={{ marginTop: "-50px" }}
+          style={{ marginTop: '-50px' }}
         >
           <Row
             className="align-items-center justify-content-center m-0"
-            style={{ height: "106px" }}
+            style={{ height: '106px' }}
           >
-            <Col md="10" px="0" style={{ marginLeft: "-28px" }}>
+            <Col md="10" px="0" style={{ marginLeft: '-28px' }}>
               <Row className="m-0">
                 <Col md="3" pe="0">
                   <label className="labelsearch" htmlFor="namaMobil">
                     Nama Mobil
-
+                  </label>
                   <br />
                   <input
                     onChange={(e) => {
@@ -71,11 +66,11 @@ function SearchModule(props) {
                     id="namaMobil"
                     placeholder="Ketik nama/tipe mobil"
                   />
-                  </label>
                 </Col>
                 <Col md="3" pe="0">
                   <label className="labelsearch" htmlFor="kategori">
                     Kategori
+                  </label>
 
                   <br />
                   <Select
@@ -89,7 +84,6 @@ function SearchModule(props) {
                     placeholder="Masukan kapasitas mobil"
                     className="namamobil"
                   />
-                  </label>
                 </Col>
                 <Col md="3" pe="0">
                   <label className="labelsearch" htmlFor="harga">
@@ -124,7 +118,7 @@ function SearchModule(props) {
                 </Col>
               </Row>
             </Col>
-            <Col md="1" style={{ paddingTop: "16px" }}>
+            <Col md="1" style={{ paddingTop: '16px' }}>
               <button
                 disabled={disabled}
                 onClick={search}
@@ -140,17 +134,17 @@ function SearchModule(props) {
       <br />
       <br />
       <div>
-        <Col lg={12} style={{ maxWidth: "1320px", margin: "auto" }}>
+        <Col lg={12} style={{ maxWidth: '1320px', margin: 'auto' }}>
           <Row>
             {binar.map((car) => (
               <Col lg={4} key={car.id}>
-                <Card style={{ height: "478px" }} className="mb-4">
+                <Card style={{ height: '478px' }} className="mb-4">
                   <CardImg
                     alt="Card image cap"
                     src={car.image}
                     top
                     width="100%"
-                    style={{ paddingBottom: "0px" }}
+                    style={{ paddingBottom: '0px' }}
                   />
                   <CardBody className="shadow pb-0">
                     <CardTitle className="headertext" tag="h5">
@@ -173,7 +167,7 @@ function SearchModule(props) {
                       onClick={() => {
                         navigate(`/DetailSewa/${car.id}`);
                       }}
-                      style={{ width: "100%" }}
+                      style={{ width: '100%' }}
                     >
                       Pilih Mobil
                     </button>
