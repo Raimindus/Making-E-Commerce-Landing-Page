@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import { getBinarApi, getBinarById } from '../services/MobilApi';
-import axios from 'axios';
+import {useState} from 'react';
+
+import { getBinarApi } from '../services/MobilApi';
 
 const GetMobil = () => {
 
@@ -14,9 +14,16 @@ const GetMobil = () => {
     const response = await getBinarApi();
 
     const resultAll = response.data;
+
+    const lowEnd = selectedHarga[0];
+    const highEnd = selectedHarga[1];
+
+    function checkNumber(h) {
+      if (selectedHarga == '') {return resultAll}
+      return h >=  lowEnd && h <= highEnd
+    }
   
-    var lowEnd = selectedHarga[0];
-    var highEnd = selectedHarga[1];
+
     console.log(lowEnd);
     console.log(highEnd);
     const checkFiltered = resultAll.filter(z => checkNumber(z.price));
@@ -28,10 +35,7 @@ const GetMobil = () => {
     .filter(z => checkNumber(z.price))
     setBinar(filtered);
 
-    function checkNumber(h) {
-      if (selectedHarga == '') {return resultAll}
-      return h >=  lowEnd && h <= highEnd
-    }
+
   }
 
   return {search, nama, setNama, selectedHarga, setSelectedHarga, selectedKategori, setSelectedKategori, binar, setBinar };

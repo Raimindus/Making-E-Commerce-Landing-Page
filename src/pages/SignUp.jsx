@@ -13,11 +13,15 @@ import LoginRight from "../components/LoginRight";
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Email tidak valid"),
   password: Yup.string().required("Password tidak valid"),
+  name: Yup.string()
+    .min(2, "*Nama minimal mempunyai 2 huruf")
+    .max(20, "*Nama maksimal mempunyai 20 huruf")
+    .required("Masukkan Nama Lengkap"),
 });
 
-function SignIn() {
+function SignUp() {
   const navigate = useNavigate();
-  const handleSignUp = () => navigate("/SignUp");
+  const handleSignIn = () => navigate("/SignIn");
 
   return (
     <div style={{ height: "100%", overflow: "hidden" }}>
@@ -38,19 +42,20 @@ function SignIn() {
               enableReinitialize
               validationSchema={validationSchema}
               initialValues={{
+                name: "",
                 email: "",
                 password: "",
               }}
               onSubmit={async (value) => {
                 try {
                   const res = await axios.post(
-                    "https://bootcamp-rent-car.herokuapp.com/customer/auth/login",
+                    "https://bootcamp-rent-car.herokuapp.com/customer/auth/register",
                     value
                   );
 
                   localStorage.setItem("auth", JSON.stringify(res.data));
 
-                  navigate("/");
+                  navigate("/SignIn");
                 } catch (e) {
                   console.error(e);
                 }
@@ -59,7 +64,23 @@ function SignIn() {
               {(formikProps) => (
                 <Form>
                   <FormGroup>
-                    <Label for="exampleEmail">Email</Label>
+                    <Label for="exampleName">Name*</Label>
+                    <Input
+                      id="exampleName"
+                      name="name"
+                      placeholder="Nama Lengkap"
+                      type="name"
+                      value={formikProps.values.name}
+                      onChange={formikProps.handleChange}
+                    />
+                    {formikProps.errors.name && formikProps.touched.name && (
+                      <small style={{ color: "red" }}>
+                        {formikProps.errors.name}
+                      </small>
+                    )}
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="exampleEmail">Email*</Label>
                     <Input
                       id="exampleEmail"
                       name="email"
@@ -79,6 +100,7 @@ function SignIn() {
                       id="examplePassword"
                       name="password"
                       placeholder="6+ karakter"
+                      type="password"
                       value={formikProps.values.password}
                       onChange={formikProps.handleChange}
                     />
@@ -95,14 +117,14 @@ function SignIn() {
                     className="button1"
                     style={{ width: "100%", backgroundColor: "#0D28A6" }}
                   >
-                    Sign In
+                    SignUp
                   </button>
                   <br />
                   <br />
                   <div className="text-center">
-                    Don&apos;t have an account?{" "}
-                    <a href="#" onClick={handleSignUp}>
-                      Sign Up for free
+                    Already have an account?{" "}
+                    <a href="#" onClick={handleSignIn}>
+                      Sign In here
                     </a>
                   </div>
                 </Form>
@@ -116,4 +138,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;
