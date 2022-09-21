@@ -1,13 +1,13 @@
-import '../index.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import "../index.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-import React from 'react';
-import Slider from 'react-slick';
-import { Col, Row } from 'reactstrap';
+import React from "react";
+import Slider from "react-slick";
+import { Col, Row } from "reactstrap";
 
-import button_5stars from '../assets/image/button_5stars.png';
-import img_testi from '../assets/image/img_testi.png';
+import button_5stars from "../assets/image/button_5stars.png";
+import img_testi from "../assets/image/img_testi.png";
 
 function TestiModule() {
   const settings = {
@@ -21,17 +21,17 @@ function TestiModule() {
         breakpoint: 600,
         settings: {
           variableWidth: false,
-          centerMode: false
-        }
-      }
-    ]
+          centerMode: false,
+        },
+      },
+    ],
   };
 
   return (
     <div>
-      <div style={{ marginBottom: '15px' }}>
-        <h2 style={{ textAlign: 'center' }}>Testimonial</h2>
-        <p style={{ textAlign: 'center' }}>
+      <div style={{ marginBottom: "15px" }}>
+        <h2 style={{ textAlign: "center" }}>Testimonial</h2>
+        <p style={{ textAlign: "center" }}>
           Berbagai review positif dari pelanggan kami
         </p>
       </div>
@@ -46,7 +46,7 @@ function TestiModule() {
                     src={img_testi}
                     className="card-img"
                     alt="foto"
-                    style={{ height: '80px', width: '80px' }}
+                    style={{ height: "80px", width: "80px" }}
                   />
                 </Col>
                 <Col md="9" className="card-text">
@@ -54,7 +54,7 @@ function TestiModule() {
                   <img
                     className="five"
                     src={button_5stars}
-                    style={{ marginLeft: '-3px' }}
+                    style={{ marginLeft: "-3px" }}
                     alt="5stars"
                   />
                   <br />
@@ -79,7 +79,7 @@ function TestiModule() {
                     src={img_testi}
                     className="card-img"
                     alt="foto"
-                    style={{ height: '80px', width: '80px' }}
+                    style={{ height: "80px", width: "80px" }}
                   />
                 </Col>
                 <Col md="9" className="card-text">
@@ -87,7 +87,7 @@ function TestiModule() {
                   <img
                     className="five"
                     src={button_5stars}
-                    style={{ marginLeft: '-3px' }}
+                    style={{ marginLeft: "-3px" }}
                     alt="5stars"
                   />
                   <br />
@@ -112,7 +112,7 @@ function TestiModule() {
                     src={img_testi}
                     className="card-img"
                     alt="foto"
-                    style={{ height: '80px', width: '80px' }}
+                    style={{ height: "80px", width: "80px" }}
                   />
                 </Col>
                 <Col md="9" className="card-text">
@@ -120,7 +120,7 @@ function TestiModule() {
                   <img
                     className="five"
                     src={button_5stars}
-                    style={{ marginLeft: '-3px' }}
+                    style={{ marginLeft: "-3px" }}
                     alt="5stars"
                   />
                   <br />
@@ -145,7 +145,7 @@ function TestiModule() {
                     src={img_testi}
                     className="card-img"
                     alt="foto"
-                    style={{ height: '80px', width: '80px' }}
+                    style={{ height: "80px", width: "80px" }}
                   />
                 </Col>
                 <Col md="9" className="card-text">
@@ -153,7 +153,7 @@ function TestiModule() {
                   <img
                     className="five"
                     src={button_5stars}
-                    style={{ marginLeft: '-3px' }}
+                    style={{ marginLeft: "-3px" }}
                     alt="5stars"
                   />
                   <br />
@@ -178,7 +178,7 @@ function TestiModule() {
                     src={img_testi}
                     className="card-img"
                     alt="foto"
-                    style={{ height: '80px', width: '80px' }}
+                    style={{ height: "80px", width: "80px" }}
                   />
                 </Col>
                 <Col md="9" className="card-text">
@@ -186,7 +186,7 @@ function TestiModule() {
                   <img
                     className="five"
                     src={button_5stars}
-                    style={{ marginLeft: '-3px' }}
+                    style={{ marginLeft: "-3px" }}
                     alt="5stars"
                   />
                   <br />
@@ -211,7 +211,7 @@ function TestiModule() {
                     src={img_testi}
                     className="card-img"
                     alt="foto"
-                    style={{ height: '80px', width: '80px' }}
+                    style={{ height: "80px", width: "80px" }}
                   />
                 </Col>
                 <Col md="9" className="card-text">
@@ -219,7 +219,7 @@ function TestiModule() {
                   <img
                     className="five"
                     src={button_5stars}
-                    style={{ marginLeft: '-3px' }}
+                    style={{ marginLeft: "-3px" }}
                     alt="5stars"
                   />
                   <br />
@@ -244,7 +244,7 @@ function TestiModule() {
                     src={img_testi}
                     className="card-img"
                     alt="foto"
-                    style={{ height: '80px', width: '80px' }}
+                    style={{ height: "80px", width: "80px" }}
                   />
                 </Col>
                 <Col md="9" className="card-text">
@@ -252,7 +252,7 @@ function TestiModule() {
                   <img
                     className="five"
                     src={button_5stars}
-                    style={{ marginLeft: '-3px' }}
+                    style={{ marginLeft: "-3px" }}
                     alt="5stars"
                   />
                   <br />
@@ -277,7 +277,7 @@ function TestiModule() {
                     src={img_testi}
                     className="card-img"
                     alt="foto"
-                    style={{ height: '80px', width: '80px' }}
+                    style={{ height: "80px", width: "80px" }}
                   />
                 </Col>
                 <Col md="9" className="card-text">
@@ -285,7 +285,7 @@ function TestiModule() {
                   <img
                     className="five"
                     src={button_5stars}
-                    style={{ marginLeft: '-3px' }}
+                    style={{ marginLeft: "-3px" }}
                     alt="5stars"
                   />
                   <br />

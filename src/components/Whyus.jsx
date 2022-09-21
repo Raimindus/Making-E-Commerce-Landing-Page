@@ -1,12 +1,14 @@
-import React from 'react';
-import '../index.css';
-import { Row, Col, Container, Card } from 'reactstrap';
-import icon_thumb from '../assets/image/icon_thumb.png';
-import icon_price from '../assets/image/icon_price.png';
-import icon_clock from '../assets/image/icon_clock.png';
-import icon_medal from '../assets/image/icon_medal.png';
+import "../index.css";
 
-const WhyusModule = () => {
+import React from "react";
+import { Card, Container } from "reactstrap";
+
+import icon_clock from "../assets/image/icon_clock.png";
+import icon_medal from "../assets/image/icon_medal.png";
+import icon_price from "../assets/image/icon_price.png";
+import icon_thumb from "../assets/image/icon_thumb.png";
+
+function WhyusModule() {
   return (
     <div>
       <Container>
@@ -18,10 +20,11 @@ const WhyusModule = () => {
       <Container>
         <div
           className="d-flex flex-wrap justify-content-around"
-          style={{ gap: '32px' }}>
+          style={{ gap: "32px" }}
+        >
           <Card className="cardWhy">
             <div className="card-body">
-              <img src={icon_thumb} />
+              <img src={icon_thumb} alt="thumb" />
               <br />
               <br />
               <h3>Mobil Lengkap</h3>
@@ -33,7 +36,7 @@ const WhyusModule = () => {
           </Card>
           <Card className="cardWhy">
             <div className="card-body">
-              <img src={icon_price} />
+              <img src={icon_price} alt="price"/>
               <br />
               <br />
               <h3>Harga Murah</h3>
@@ -45,7 +48,7 @@ const WhyusModule = () => {
           </Card>
           <Card className="cardWhy">
             <div className="card-body">
-              <img src={icon_clock} />
+              <img src={icon_clock} alt="clock"/>
               <br />
               <br />
               <h3>Layanan 24 Jam</h3>
@@ -57,11 +60,11 @@ const WhyusModule = () => {
           </Card>
           <Card className="cardWhy">
             <div className="card-body">
-              <img src={icon_medal} />
+              <img src={icon_medal} alt="medal" />
               <br />
               <br />
               <h3>Sopir Profesional</h3>
-              <p class="card-text">
+              <p className="card-text">
                 Sopir yang profesional, berpengalaman, jujur, ramah dan selalu
                 tepat waktu
               </p>
@@ -71,6 +74,6 @@ const WhyusModule = () => {
       </Container>
     </div>
   );
-};
+}
 
 export default WhyusModule;

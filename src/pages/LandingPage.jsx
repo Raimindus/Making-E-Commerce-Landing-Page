@@ -1,15 +1,16 @@
-import React from 'react';
-import FooterModule from '../components/Footer';
-import HeaderModule from '../components/Header';
-import HeroModule from '../components/Hero';
-import ServicesModule from '../components/Services';
-import WhyusModule from '../components/Whyus';
-import BannerModule from '../components/Banner';
-import TestiModule from '../components/Testi';
-import FaqModule from '../components/Faq';
-import SideBar from '../components/Sidebar';
+import React from "react";
 
-const LandingPage = () => {
+import BannerModule from "../components/Banner";
+import FaqModule from "../components/Faq";
+import FooterModule from "../components/Footer";
+import HeaderModule from "../components/Header";
+import HeroModule from "../components/Hero";
+import ServicesModule from "../components/Services";
+import SideBar from "../components/Sidebar";
+import TestiModule from "../components/Testi";
+import WhyusModule from "../components/Whyus";
+
+function LandingPage() {
   return (
     <div>
       <div id="header">
@@ -55,6 +56,6 @@ const LandingPage = () => {
       <FooterModule />
     </div>
   );
-};
+}
 
 export default LandingPage;

@@ -1,15 +1,10 @@
-import React from 'react';
-import axios from 'axios';
+import axios from "axios";
 
-const getBinarApi = () => {
-  return axios.get('https://bootcamp-rent-car.herokuapp.com/admin/car');
-};
 
-const getBinarById = (binarId) => {
-  return axios.get(
-    `https://bootcamp-rent-car.herokuapp.com/admin/car/${binarId}`
-  );
-};
+const getBinarApi = () => axios.get('https://bootcamp-rent-car.herokuapp.com/admin/car');
 
-export { getBinarById };
-export { getBinarApi };
+const getBinarById = (binarId) => axios.get(`https://bootcamp-rent-car.herokuapp.com/admin/car/${binarId}`);
+
+export {getBinarById};
+export {getBinarApi};
+export {getBinarApi};

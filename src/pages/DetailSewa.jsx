@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import HeaderModule from '../components/Header';
-import FooterModule from '../components/Footer';
-import SearchModule from '../components/Search';
-import { Container, Row, Col, Card, CardBody, Button } from 'reactstrap';
-import { useParams } from 'react-router-dom';
-import { getBinarById } from '../services/MobilApi';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const DetailSewa = () => {
+import React, { useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Card, CardBody, Col, Container, Row } from 'reactstrap';
+
+import FooterModule from '../components/Footer';
+import HeaderModule from '../components/Header';
+import SearchModule from '../components/Search';
+import { getBinarById } from '../services/MobilApi';
+
+function DetailSewa() {
   const [startDate, setStartDate] = useState(new Date());
+  const navigate = useNavigate();
 
   const [detailMobil, setDetailMobil] = useState();
   const { binarId } = useParams();
@@ -33,7 +36,8 @@ const DetailSewa = () => {
           backgroundColor: '#F1F3FF',
           position: 'relative',
           zIndex: '-2'
-        }}></div>
+        }}
+      />
       <SearchModule disabled />
       <Container>
         <Row>
@@ -98,7 +102,7 @@ const DetailSewa = () => {
                   <p>{detailMobil.name}</p>
                   <p>{detailMobil.category}</p>
                   <br />
-                  <label for="datePicker">
+                  <label htmlFor="datePicker">
                     Tentukan lama sewa mobil (max. 7 hari)
                   </label>
                   <DatePicker
@@ -110,10 +114,8 @@ const DetailSewa = () => {
                   <br />
                   <Container
                     fluid
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between'
-                    }}>
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
                     <div>
                       <p>Total</p>
                     </div>
@@ -131,7 +133,11 @@ const DetailSewa = () => {
                     borderRadius: '2px',
                     backgroundColor: '#5CB85F',
                     borderColor: 'transparent'
-                  }}>
+                  }}
+                  onClick={() => {
+                    navigate(`/Pembayaran/${detailMobil.id}`);
+                  }}
+                >
                   Lanjutkan Pembayaran
                 </Button>
               </CardBody>
@@ -144,6 +150,6 @@ const DetailSewa = () => {
       <FooterModule />
     </div>
   );
-};
+}
 
 export default DetailSewa;

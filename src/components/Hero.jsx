@@ -1,16 +1,16 @@
-import '../index.css';
+import "../index.css";
 
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Col, Container, Row } from 'reactstrap';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Col, Container, Row } from "reactstrap";
 
-import imgCar from '../assets/image/img_car.png';
+import img_car from "../assets/image/img_car.png";
 
 function HeroModule() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/CariMobil');
+    navigate("/CariMobil");
   };
 
   return (
@@ -19,7 +19,8 @@ function HeroModule() {
       px="0"
       mx="0"
       className="banner"
-      style={{ height: '100%', backgroundColor: '#F1F3FF' }}>
+      style={{ height: "100%", backgroundColor: "#F1F3FF" }}
+    >
       <Container>
         <Row className="main-container">
           <Col md="6" mt="5" pt="5">
@@ -30,7 +31,7 @@ function HeroModule() {
                 kawasan (Lokasimu)
               </h1>
             </div>
-            <div className="pt-3">
+            <div pt="3">
               <p>
                 Selamat datang di Binar Car Rental. Kami menyediakan mobil
                 kualitas
@@ -39,17 +40,18 @@ function HeroModule() {
                 <br /> untuk sewa mobil selama 24 jam.
               </p>
             </div>
-            <div className="pt-2">
+            <div pt="2">
               <button
                 onClick={handleClick}
                 type="button"
-                className="button1 shadow">
+                className="button1 shadow"
+              >
                 Mulai Sewa Mobil
               </button>
             </div>
           </Col>
           <Col md="6">
-            <img flex src={imgCar} className="mobils" alt="mobil" />
+            <img flex src={img_car} className="mobils" alt="mobil" />
           </Col>
         </Row>
       </Container>

@@ -1,9 +1,9 @@
-import '../index.css';
+import "../index.css";
 
-import React from 'react';
-import { Col, Container, Row } from 'reactstrap';
+import React from "react";
+import { Col, Container, Row } from "reactstrap";
 
-import img_girl from '../assets/image/img_girl.png';
+import img_girl from "../assets/image/img_girl.png";
 
 function ServicesModule() {
   return (
@@ -13,7 +13,7 @@ function ServicesModule() {
           <img
             src={img_girl}
             alt="girl"
-            style={{ maxWidth: '100%', height: 'auto' }}
+            style={{ maxWidth: "100%", height: "auto" }}
           />
         </Col>
         <Col md="5" pt="5" mt="5">

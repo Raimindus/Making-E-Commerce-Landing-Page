@@ -67,7 +67,7 @@ function FooterModule() {
         </Col>
         <Col md={3}>
           <p>Copyright Binar 2022</p>
-          <button className="bluebox" style={{ border: '0' }} />
+          <div className="bluebox" style={{ border: '0' }} />
         </Col>
       </Row>
       <br />

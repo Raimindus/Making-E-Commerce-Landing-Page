@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import HeaderModule from '../components/Header';
-import FooterModule from '../components/Footer';
-import { Card, Row, Col, Container, CardBody } from 'reactstrap';
-import { getBinarById } from '../services/MobilApi';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
-const Pembayaran = () => {
+import FooterModule from '../components/Footer';
+import HeaderModule from '../components/Header';
+import { getBinarById } from '../services/MobilApi';
+
+function Pembayaran() {
   const [detailMobil, setDetailMobil] = useState();
   const { binarId } = useParams();
+  const navigate = useNavigate();
 
   const getDetailSewa = async () => {
     const res = await getBinarById(binarId);
@@ -29,7 +31,8 @@ const Pembayaran = () => {
           backgroundColor: '#F1F3FF',
           position: 'relative',
           zIndex: '-2'
-        }}></div>
+        }}
+      />
       <Container style={{ marginTop: '-50px' }}>
         <Card>
           <CardBody>
@@ -48,7 +51,7 @@ const Pembayaran = () => {
               <Col sm={3}>
                 <p>Tanggal Mulai Sewa</p>
                 <br />
-                <p></p>
+                <p />
               </Col>
               <Col sm={3}>
                 <p>Tanggal Akhir Sewa</p>
@@ -67,22 +70,67 @@ const Pembayaran = () => {
                   Kamu bisa membayar dengan transfer melalui ATM, Internet
                   Banking atau Mobile Banking
                 </p>
-                <div>BCA Transfer</div>
-                <div>BNI Transfer</div>
-                <div>Mandiri Transfer</div>
+                <Row>
+                  <Card
+                    style={{ width: '61px', height: '30px', paddingLeft: '' }}
+                  >
+                    BCA
+                  </Card>
+                  BCA Transfer
+                </Row>
+                <br />
+                <Row>
+                  <Card
+                    style={{ width: '61px', height: '30px', paddingLeft: '' }}
+                  >
+                    BNI
+                  </Card>
+                  BNI Transfer
+                </Row>
+                <br />
+                <Row>
+                  <Card
+                    style={{ width: '61px', height: '30px', paddingLeft: '' }}
+                  >
+                    Mandiri
+                  </Card>
+                  Mandiri Transfer
+                </Row>
               </CardBody>
             </Card>
           </Col>
           <Col md={5}>
             <Card>
               <CardBody>
-                <img
-                  alt="detil mobil"
-                  src={detailMobil.image}
-                  style={{ width: '100%' }}
-                />
                 <p>{detailMobil.name}</p>
                 <p>{detailMobil.category}</p>
+                <p>Harga</p>
+                <ul>
+                  <li>Sewa Mobil</li>
+                </ul>
+                <p>Biaya Lainnya</p>
+                <ul>
+                  <li>Pajak</li>
+                  <li>Biaya makan sopir</li>
+                </ul>
+                <p>Belum Termasuk</p>
+                <ul>
+                  <li>Bensin</li>
+                  <li>Tol dan parkir</li>
+                </ul>
+                <br />
+                <p>Total</p>
+                <br />
+                <button
+                  onClick={() => {
+                    navigate(`/Etiket/${detailMobil.id}`);
+                  }}
+                  type="button"
+                  style={{ width: '100%' }}
+                  className="button1 shadow"
+                >
+                  Bayar
+                </button>
               </CardBody>
             </Card>
           </Col>
@@ -92,6 +140,6 @@ const Pembayaran = () => {
       <FooterModule />
     </div>
   );
-};
+}
 
 export default Pembayaran;

@@ -12,12 +12,20 @@
   "plugins": ["react", "simple-import-sort"],
   "rules": {
     "react/jsx-filename-extension": "off",
-    "react/react-in-jsx-scope": "off",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
-    "jsx-a11y/label-has-associated-control": "warn",
-    "react/destructuring-assignment": "off",
-    "camelcase" : "off",
-    "react/button-has-type" : "warn",
+    "camelcase": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/no-unescaped-entities": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "eqeqeq": "warn",
+    "import/prefer-default-export": "warn",
+    "react/no-unknown-property": "warn",
+    "react/jsx-props-no-spreading" :"warn",
+    "react/prop-types" :"warn",
+    "react/sort-comp" :"warn",
+    "class-methods-use-this" : "warn",
+    "react/destructuring-assignment" : "warn",
+    "react/no-unused-class-component-methods" : "warn"
   }
 }
