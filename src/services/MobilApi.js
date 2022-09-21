@@ -7,4 +7,3 @@ const getBinarById = (binarId) => axios.get(`https://bootcamp-rent-car.herokuapp
 
 export {getBinarById};
 export {getBinarApi};
-export {getBinarApi};

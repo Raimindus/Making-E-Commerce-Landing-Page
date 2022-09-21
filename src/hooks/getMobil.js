@@ -42,4 +42,3 @@ const GetMobil = () => {
 };
 
 export default GetMobil;
-export default GetMobil;
