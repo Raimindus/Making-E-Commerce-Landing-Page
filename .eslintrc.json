@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": ["plugin:react/recommended", "airbnb", "prettier"],
   "overrides": [],
@@ -21,12 +22,12 @@
     "eqeqeq": "warn",
     "import/prefer-default-export": "warn",
     "react/no-unknown-property": "warn",
-    "react/jsx-props-no-spreading" :"warn",
-    "react/prop-types" :"warn",
-    "react/sort-comp" :"warn",
-    "class-methods-use-this" : "warn",
-    "react/destructuring-assignment" : "warn",
-    "react/no-unused-class-component-methods" : "warn",
-    "no-param-reassign" : "warn"
+    "react/jsx-props-no-spreading": "warn",
+    "react/prop-types": "warn",
+    "react/sort-comp": "warn",
+    "class-methods-use-this": "warn",
+    "react/destructuring-assignment": "warn",
+    "react/no-unused-class-component-methods": "warn",
+    "no-param-reassign": "warn"
   }
 }
