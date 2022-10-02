@@ -1,6 +1,6 @@
 // import FlipCountdown from '@rumess/react-flip-countdown';
 import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useDropzone } from 'react-dropzone';
@@ -10,24 +10,121 @@ import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 import getIDAbbrFromInternationalAbbr from '../helper/getIDAbbrFromInternationalAbbr';
+import carPrice from '../hooks/carPrice';
 import { getBinarById } from '../services/MobilApi';
 
+const baseStyle = {
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '20px',
+  borderWidth: 2,
+  borderRadius: 2,
+  borderColor: '#eeeeee',
+  borderStyle: 'dashed',
+  backgroundColor: '#fafafa',
+  color: '#bdbdbd',
+  outline: 'none',
+  transition: 'border .24s ease-in-out'
+};
+
+const focusedStyle = {
+  borderColor: '#2196f3'
+};
+
+const acceptStyle = {
+  borderColor: '#00e676'
+};
+
+const rejectStyle = {
+  borderColor: '#ff1744'
+};
+
+const thumbsContainer = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  marginTop: 16
+};
+
+const thumb = {
+  display: 'inline-flex',
+  borderRadius: 2,
+  border: '1px solid #eaeaea',
+  marginBottom: 8,
+  marginRight: 8,
+  width: 100,
+  height: 100,
+  padding: 4,
+  boxSizing: 'border-box'
+};
+
+const thumbInner = {
+  display: 'flex',
+  minWidth: 0,
+  overflow: 'hidden'
+};
+
+const img = {
+  display: 'block',
+  width: 'auto',
+  height: '100%'
+};
+
 function Konfirmasi() {
+  const [files, setFiles] = useState([]);
   const [detailMobil, setDetailMobil] = useState();
   const { binarId } = useParams();
   const navigate = useNavigate();
   const [bayar, setBayar] = useState(true);
   const [konfirm, setKonfirm] = useState(false);
 
+  const { finalPrice } = carPrice();
   const date = '2022-09-01T12:54:11.277Z';
 
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
+    useDropzone({
+      accept: {
+        'image/jpeg': [],
+        'image/png': []
+      },
+      onDrop: (acceptedFiles) => {
+        setFiles(
+          acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file)
+            })
+          )
+        );
+      }
+    });
 
-  const files = acceptedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
+  const thumbs = files.map((file) => (
+    <div style={thumb} key={file.name}>
+      <div style={thumbInner}>
+        <img
+          src={file.preview}
+          style={img}
+          // Revoke data uri after image is loaded
+          onLoad={() => {
+            URL.revokeObjectURL(file.preview);
+          }}
+          alt="thumbnail"
+        />
+      </div>
+    </div>
   ));
+
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isFocused ? focusedStyle : {}),
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {})
+    }),
+    [isFocused, isDragAccept, isDragReject]
+  );
 
   const getDetailSewa = async () => {
     const res = await getBinarById(binarId);
@@ -59,8 +156,9 @@ function Konfirmasi() {
                     <p className="dropdown">Selesaikan Pembayaran Sebelum</p>
                     <p>
                       {dayjs.tz(date).format('dddd, DD MMMM YYYY [jam] HH:mm ')}
-                      {getIDAbbrFromInternationalAbbr(dayjs.tz(date).format('z'))}
-
+                      {getIDAbbrFromInternationalAbbr(
+                        dayjs.tz(date).format('z')
+                      )}
                     </p>
                   </Col>
                   <Col sm={4}>
@@ -104,7 +202,7 @@ function Konfirmasi() {
                 <div>54104257877</div>
                 <br />
                 Total Bayar
-                <div>Rp.</div>
+                <div>Rp. {finalPrice}</div>
               </CardBody>
             </Card>
             <br />
@@ -196,16 +294,14 @@ function Konfirmasi() {
                   <br />
                   <br />
                   <section className="container">
-                    <div {...getRootProps({ className: 'dropzone' })}>
+                    <div {...getRootProps({ style })}>
                       <input {...getInputProps()} />
                       <p>
                         Drag 'n' drop some files here, or click to select files
                       </p>
+                      <em>(Only *.jpeg and *.png images will be accepted)</em>
                     </div>
-                    <aside>
-                      <h4>Files</h4>
-                      <ul>{files}</ul>
-                    </aside>
+                    <aside style={thumbsContainer}>{thumbs}</aside>
                   </section>
                   <br />
                   <button

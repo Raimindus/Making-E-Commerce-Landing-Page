@@ -1,37 +1,57 @@
-import dayjs from 'dayjs';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import dayjs from 'dayjs';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Card, CardBody, Col, Container, Row } from 'reactstrap';
+import {
+  Card,
+  CardBody,
+  Col,
+  Container,
+  ListGroup,
+  ListGroupItem,
+  Row
+} from 'reactstrap';
 
+import Vector from '../assets/image/Vector.png';
+import VectorFlip from '../assets/image/VectorFlip.png';
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
-import { getDetailCars, selectDetailCars } from '../redux/features/carSlice';
-import { selectDateRange } from '../redux/features/dateSlice';
 // import { getBinarById } from '../services/MobilApi';
+import carPrice from '../hooks/carPrice';
+import { getDetailCars } from '../redux/features/carSlice';
+// import { selectDateRange } from '../redux/features/dateSlice';
 
 function Pembayaran() {
-  const dates = useSelector(selectDateRange);
-  const detailMobil = useSelector(selectDetailCars);
+  const [open, setOpen] = useState(false);
+  const [close, setClose] = useState(true);
+  // const dates = useSelector(selectDateRange);
+  // const detailMobil = useSelector(selectDetailCars);
   const { binarId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(dates);
 
-  const date1 = dayjs(dates[0]);
-  const date2 = dayjs(dates[1]);
-  const dateDiff = date2.diff(date1, 'day');
-  console.log(dateDiff);
+  const { finalPrice, dates, dateDiff, detailMobil } = carPrice();
 
-  console.log(date1);
-  console.log(date2);
+  // const date1 = dayjs(dates[0]);
+  // const date2 = dayjs(dates[1]);
+  // const dateDiff = date2.diff(date1, 'day');
 
-  const finalPrice = dateDiff * detailMobil.price;
+  // const finalPrice = dateDiff * detailMobil.price;
 
   // const getDetailSewa = async () => {
   //   const res = await getBinarById(binarId);
   //   setDetailMobil(res.data);
   // };
+
+  const handleOpen = () => {
+    setClose(false);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setClose(true);
+    setOpen(false);
+  };
 
   useEffect(() => {
     dispatch(getDetailCars(binarId));
@@ -88,32 +108,62 @@ function Pembayaran() {
                   Kamu bisa membayar dengan transfer melalui ATM, Internet
                   Banking atau Mobile Banking
                 </p>
-                <Row>
-                  <Card
-                    style={{ width: '61px', height: '30px', paddingLeft: '' }}
-                  >
-                    BCA
-                  </Card>
-                  BCA Transfer
-                </Row>
                 <br />
-                <Row>
-                  <Card
-                    style={{ width: '61px', height: '30px', paddingLeft: '' }}
-                  >
-                    BNI
-                  </Card>
-                  BNI Transfer
-                </Row>
-                <br />
-                <Row>
-                  <Card
-                    style={{ width: '61px', height: '30px', paddingLeft: '' }}
-                  >
-                    Mandiri
-                  </Card>
-                  Mandiri Transfer
-                </Row>
+                <ListGroup flush>
+                  <ListGroupItem>
+                    <Row>
+                      {' '}
+                      <Card
+                        style={{
+                          width: '61px',
+                          height: '30px',
+                          paddingLeft: '14px',
+                          paddingTop: '2px'
+                        }}
+                      >
+                        BCA
+                      </Card>
+                      &nbsp;&nbsp;&nbsp;BCA Transfer
+                    </Row>
+                  </ListGroupItem>
+                  <br />
+                  <ListGroupItem>
+                    <Row>
+                      {' '}
+                      <Card
+                        style={{
+                          width: '61px',
+                          height: '30px',
+                          paddingLeft: '15px',
+                          paddingright: '0px',
+                          paddingTop: '2px'
+                        }}
+                      >
+                        BNI
+                      </Card>
+                      &nbsp;&nbsp;&nbsp;BNI Transfer
+                    </Row>
+                  </ListGroupItem>
+                  <br />
+                  <ListGroupItem>
+                    {' '}
+                    <Row>
+                      {' '}
+                      <Card
+                        style={{
+                          width: '61px',
+                          height: '30px',
+                          paddingLeft: '4px',
+                          paddingRight: '0px',
+                          paddingTop: '2px'
+                        }}
+                      >
+                        Mandiri
+                      </Card>
+                      &nbsp;&nbsp;&nbsp;Mandiri Transfer
+                    </Row>
+                  </ListGroupItem>
+                </ListGroup>
               </CardBody>
             </Card>
           </Col>
@@ -122,39 +172,129 @@ function Pembayaran() {
               <CardBody>
                 <p>{detailMobil.name}</p>
                 <p>{detailMobil.category}</p>
-                <p>Total Rp. {finalPrice}</p>
-                <p>Harga</p>
-                <ul>
-                  <li>Sewa Mobil Rp. {detailMobil.price} x {dateDiff} Hari Rp. {finalPrice} </li>
-                </ul>
-                <p>Biaya Lainnya</p>
-                <ul>
-                  <li>Pajak</li>
-                  <li>Biaya makan sopir</li>
-                </ul>
-                <p>Belum Termasuk</p>
-                <ul>
-                  <li>Bensin</li>
-                  <li>Tol dan parkir</li>
-                </ul>
-                <br />
-                <p>Total</p>
-                <br />
-                <button
-                  onClick={() => {
-                    navigate(`/Konfirmasi/${detailMobil.id}`);
-                  }}
-                  type="button"
-                  style={{ width: '100%' }}
-                  className="button1 shadow"
-                >
-                  Bayar
-                </button>
+                {open && (
+                  <div>
+                    {' '}
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <p>
+                        Total &nbsp;{' '}
+                        <a href="#" type="button" onClick={handleClose}>
+                          <img src={Vector} alt="dropdown" />
+                        </a>{' '}
+                      </p>
+                      <p>&nbsp; Rp. {finalPrice}</p>
+                    </div>
+                    <p>Harga</p>
+                    <ul>
+                      <li>
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                          }}
+                        >
+                          <p>
+                            Sewa Mobil Rp. {detailMobil.price} x {dateDiff} Hari
+                          </p>
+                          Rp. {finalPrice}{' '}
+                        </div>
+                      </li>
+                    </ul>
+                    <p>Biaya Lainnya</p>
+                    <ul>
+                      <li>
+                        {' '}
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                          }}
+                        >
+                          Pajak <p style={{ color: '#5CB85F' }}>Termasuk</p>
+                        </div>
+                      </li>
+                      <li>
+                        {' '}
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                          }}
+                        >
+                          Biaya makan sopir{' '}
+                          <p style={{ color: '#5CB85F' }}>Termasuk</p>
+                        </div>
+                      </li>
+                    </ul>
+                    <p>Belum Termasuk</p>
+                    <ul>
+                      <li>Bensin</li>
+                      <li>Tol dan parkir</li>
+                    </ul>
+                    <br />
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <p>Total &nbsp; </p>
+                      <p>&nbsp; Rp. {finalPrice}</p>
+                    </div>
+                    <br />
+                    <button
+                      onClick={() => {
+                        navigate(`/Konfirmasi/${detailMobil.id}`);
+                      }}
+                      type="button"
+                      style={{ width: '100%' }}
+                      className="button1 shadow"
+                    >
+                      Bayar
+                    </button>
+                  </div>
+                )}
+                {close && (
+                  <div>
+                    {' '}
+                    <p>
+                      Total &nbsp;{' '}
+                      <a href="#" type="button" onClick={handleOpen}>
+                        <img src={VectorFlip} alt="dropdown" />
+                      </a>{' '}
+                      &nbsp; Rp. {finalPrice}
+                    </p>
+                    <button
+                      onClick={() => {
+                        navigate(`/Konfirmasi/${detailMobil.id}`);
+                      }}
+                      type="button"
+                      style={{ width: '100%' }}
+                      className="button1 shadow"
+                    >
+                      Bayar
+                    </button>
+                  </div>
+                )}
               </CardBody>
             </Card>
           </Col>
         </Row>
       </Container>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <br />
       <FooterModule />
     </div>
