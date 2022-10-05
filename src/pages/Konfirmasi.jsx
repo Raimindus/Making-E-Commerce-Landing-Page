@@ -1,4 +1,4 @@
-// import FlipCountdown from '@rumess/react-flip-countdown';
+import FlipCountdown from '@rumess/react-flip-countdown';
 import dayjs from 'dayjs';
 import React, { useEffect, useMemo, useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
@@ -81,7 +81,13 @@ function Konfirmasi() {
   const [konfirm, setKonfirm] = useState(false);
 
   const { finalPrice } = carPrice();
-  const date = '2022-09-01T12:54:11.277Z';
+  // const date = '2022-09-01T12:54:11.277Z';
+  const date = new Date();
+  const newDate = date.setDate(date.getDate() + 1);
+  const tenDate = date.setMinutes(date.getMinutes() + 10);
+  console.log(newDate);
+  console.log(tenDate);
+  console.log(date);
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
     useDropzone({
@@ -162,7 +168,7 @@ function Konfirmasi() {
                     </p>
                   </Col>
                   <Col sm={4}>
-                    {/* <FlipCountdown
+                    <FlipCountdown
                       size="small"
                       hideYear
                       hideMonth
@@ -172,7 +178,7 @@ function Konfirmasi() {
                       minuteTitle="menit"
                       secondTitle="detik"
                       endAt={newDate} // Date/Time
-                    /> */}
+                    />
                   </Col>
                 </Row>
               </CardBody>
@@ -269,7 +275,7 @@ function Konfirmasi() {
               {konfirm && (
                 <CardBody>
                   <p>Konfirmasi Pembayaran</p>
-                  {/* <FlipCountdown
+                  <FlipCountdown
                     size="small"
                     hideYear
                     hideMonth
@@ -279,8 +285,8 @@ function Konfirmasi() {
                     hourTitle="jam"
                     minuteTitle="menit"
                     secondTitle="detik"
-                    endAt={newDateObj} // Date/Time
-                  /> */}
+                    endAt={tenDate} // Date/Time
+                  />
                   <br />
                   Terima kasih telah melakukan konfirmasi pembayaran.
                   Pembayaranmu akan segera kami cek tunggu kurang lebih 10 menit

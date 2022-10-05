@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Document, Page } from 'react-pdf';
+import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5';
 import { Card, CardBody, Container } from 'reactstrap';
 
+import BinarPdf from '../assets/BinarPdf.pdf';
 import button_download from '../assets/image/button_download.png';
 import icon_success from '../assets/image/icon_success.png';
 import FooterModule from '../components/Footer';
@@ -42,10 +43,7 @@ function Etiket() {
               </div>
             </Container>
             <div>
-              <Document
-                file="../assets/BinarPdf.pdf"
-                onLoadSuccess={onDocumentLoadSuccess}
-              >
+              <Document file={BinarPdf} onLoadSuccess={onDocumentLoadSuccess}>
                 <Page pageNumber={pageNumber} />
               </Document>
               <p>

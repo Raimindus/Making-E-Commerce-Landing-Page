@@ -1,4 +1,5 @@
 // import dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -18,7 +19,7 @@ import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 // import { getBinarById } from '../services/MobilApi';
 import carPrice from '../hooks/carPrice';
-import { getDetailCars } from '../redux/features/carSlice';
+import { getDetailCars, postCars} from '../redux/features/carSlice';
 // import { selectDateRange } from '../redux/features/dateSlice';
 
 function Pembayaran() {
@@ -42,6 +43,23 @@ function Pembayaran() {
   //   const res = await getBinarById(binarId);
   //   setDetailMobil(res.data);
   // };
+  const date1 = dayjs(dates[0]).format('YYYY-MM-DD');
+  const date2 = dayjs(dates[1]).format('YYYY-MM-DD')
+
+  const postData = {
+    "start_rent_at": date1,
+    "finish_rent_at": date2,
+    "car_id": detailMobil.id
+  }
+
+  const handlePost = () => {
+    try {
+      dispatch(postCars(postData));
+      navigate(`/Konfirmasi/${detailMobil.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleOpen = () => {
     setClose(false);
@@ -247,16 +265,6 @@ function Pembayaran() {
                       <p>&nbsp; Rp. {finalPrice}</p>
                     </div>
                     <br />
-                    <button
-                      onClick={() => {
-                        navigate(`/Konfirmasi/${detailMobil.id}`);
-                      }}
-                      type="button"
-                      style={{ width: '100%' }}
-                      className="button1 shadow"
-                    >
-                      Bayar
-                    </button>
                   </div>
                 )}
                 {close && (
@@ -269,18 +277,16 @@ function Pembayaran() {
                       </a>{' '}
                       &nbsp; Rp. {finalPrice}
                     </p>
-                    <button
-                      onClick={() => {
-                        navigate(`/Konfirmasi/${detailMobil.id}`);
-                      }}
-                      type="button"
-                      style={{ width: '100%' }}
-                      className="button1 shadow"
-                    >
-                      Bayar
-                    </button>
                   </div>
                 )}
+                <button
+                  onClick={handlePost}
+                  type="button"
+                  style={{ width: '100%' }}
+                  className="button1 shadow"
+                >
+                  Bayar
+                </button>
               </CardBody>
             </Card>
           </Col>
