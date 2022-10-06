@@ -137,7 +137,7 @@ function SearchModule(props) {
       <div>
         <Col lg={12} style={{ maxWidth: '1320px', margin: 'auto' }}>
           <Row>
-            {binar.map((car) => (
+            {binar.slice(0,20).map((car) => (
               <Col lg={4} key={car.id}>
                 <Card style={{ height: '478px' }} className="mb-4">
                   <Img

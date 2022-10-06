@@ -1,34 +1,43 @@
-import "../index.css";
+import '../index.css';
 
-import axios from "axios";
-import { Form, Formik } from "formik";
-import React from "react";
-import { Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { Col, FormGroup, Input, Label } from "reactstrap";
-import * as Yup from "yup";
+import axios from 'axios';
+import { Form, Formik } from 'formik';
+import React from 'react';
+import { Row } from 'react-bootstrap';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Col, FormGroup, Input, Label } from 'reactstrap';
+import * as Yup from 'yup';
 
-import LoginRight from "../components/LoginRight";
+import LoginRight from '../components/LoginRight';
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().email("Email tidak valid"),
-  password: Yup.string().required("Password tidak valid"),
+  email: Yup.string().email('Email tidak valid'),
+  password: Yup.string().required('Password tidak valid')
 });
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 function SignIn() {
+  const query = useQuery();
+  const Url = query.get('redirect_url');
+
   const navigate = useNavigate();
-  const handleSignUp = () => navigate("/SignUp");
+  const handleSignUp = () => navigate('/SignUp');
 
   return (
-    <div style={{ height: "100%", overflow: "hidden" }}>
+    <div style={{ height: '100%', overflow: 'hidden' }}>
       <Row>
         <Col
           lg={6}
-          style={{ height: "100%", display: "flex", minHeight: "100vh" }}
+          style={{ height: '100%', display: 'flex', minHeight: '100vh' }}
           className="justify-content-center, align-items-center"
         >
-          <div style={{ margin: "auto", width: "370px" }}>
-            <div className="bluebox" style={{ backgroundColor: "#CFD4ED" }} />
+          <div style={{ margin: 'auto', width: '370px' }}>
+            <div className="bluebox" style={{ backgroundColor: '#CFD4ED' }} />
             <br />
             <div>
               <h2>Welcome Back!</h2>
@@ -38,19 +47,23 @@ function SignIn() {
               enableReinitialize
               validationSchema={validationSchema}
               initialValues={{
-                email: "",
-                password: "",
+                email: '',
+                password: ''
               }}
               onSubmit={async (value) => {
                 try {
                   const res = await axios.post(
-                    "https://bootcamp-rent-car.herokuapp.com/customer/auth/login",
+                    'https://bootcamp-rent-car.herokuapp.com/customer/auth/login',
                     value
                   );
 
-                  localStorage.setItem("auth", JSON.stringify(res.data));
+                  localStorage.setItem('auth', JSON.stringify(res.data));
 
-                  navigate(-1);
+                  if (Url) {
+                    navigate(`${Url}`);
+                  } else {
+                    navigate('/');
+                  }
                 } catch (e) {
                   console.error(e);
                 }
@@ -68,7 +81,7 @@ function SignIn() {
                       onChange={formikProps.handleChange}
                     />
                     {formikProps.errors.email && formikProps.touched.email && (
-                      <small style={{ color: "red" }}>
+                      <small style={{ color: 'red' }}>
                         {formikProps.errors.email}
                       </small>
                     )}
@@ -84,7 +97,7 @@ function SignIn() {
                     />
                     {formikProps.errors.password &&
                       formikProps.touched.password && (
-                        <small style={{ color: "red" }}>
+                        <small style={{ color: 'red' }}>
                           {formikProps.errors.password}
                         </small>
                       )}
@@ -93,14 +106,14 @@ function SignIn() {
                   <button
                     type="submit"
                     className="button1"
-                    style={{ width: "100%", backgroundColor: "#0D28A6" }}
+                    style={{ width: '100%', backgroundColor: '#0D28A6' }}
                   >
                     Sign In
                   </button>
                   <br />
                   <br />
                   <div className="text-center">
-                    Don&apos;t have an account?{" "}
+                    Don&apos;t have an account?{' '}
                     <a href="#" onClick={handleSignUp}>
                       Sign Up for free
                     </a>

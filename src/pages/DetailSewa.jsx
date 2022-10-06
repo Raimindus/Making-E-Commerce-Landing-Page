@@ -1,25 +1,53 @@
-import React, { useEffect } from 'react';
+// import dayjs from 'dayjs';
+import React, { useEffect, useState } from 'react';
+import { Img } from 'react-image';
 import DatePicker from 'react-multi-date-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Card, CardBody, Col, Container, Row } from 'reactstrap';
 
+import placeholderImg from '../assets/image/placeholderImg.jpg';
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 import SearchModule from '../components/Search';
-import { getDetailCars, selectDetailCars } from '../redux/features/carSlice';
-import { dateRange } from '../redux/features/dateSlice';
+import {
+  getDetailCars,
+  postCars,
+  selectDetailCars
+} from '../redux/features/carSlice';
+
 // import { getBinarById } from '../services/MobilApi';
 
 function DetailSewa() {
+  const [values, setValues] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  console.log(values);
   const detailMobil = useSelector(selectDetailCars);
   const { binarId } = useParams();
 
   const handleChange = (value) => {
-    dispatch(dateRange([value[0].format(), value[1].format()]));
+    // your modification on passed value ....
+    setValues(value);
+  };
+  // disini function buat post api
+
+  const date1 = '';
+  const date2 = '';
+
+  const postData = {
+    start_rent_at: date1,
+    finish_rent_at: date2,
+    car_id: detailMobil.id
+  };
+
+  const handlePost = async () => {
+    try {
+      const res = await dispatch(postCars(postData)).unwrap();
+      navigate(`/Pembayaran/${res.id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // const getDetailSewa = async () => {
@@ -98,9 +126,9 @@ function DetailSewa() {
           <Col md={5}>
             <Card className="shadow">
               <CardBody>
-                <img
+                <Img
                   alt="detil mobil"
-                  src={detailMobil.image}
+                  src={[detailMobil.image, placeholderImg]}
                   style={{ width: '100%' }}
                 />
                 <div>
@@ -135,9 +163,7 @@ function DetailSewa() {
                     backgroundColor: '#5CB85F',
                     borderColor: 'transparent'
                   }}
-                  onClick={() => {
-                    navigate(`/Pembayaran/${detailMobil.id}`);
-                  }}
+                  onClick={handlePost}
                 >
                   Lanjutkan Pembayaran
                 </Button>
