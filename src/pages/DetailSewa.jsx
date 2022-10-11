@@ -19,7 +19,7 @@ import {
 // import { getBinarById } from '../services/MobilApi';
 
 function DetailSewa() {
-  const [values, setValues] = useState();
+  const [values, setValues] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   console.log(values);
