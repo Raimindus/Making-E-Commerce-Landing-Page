@@ -1,30 +1,35 @@
-import 'react-datepicker/dist/react-datepicker.css';
-
-import React, { useEffect, useState } from 'react';
-import DatePicker from 'react-datepicker';
+import React, { useEffect } from 'react';
+import DatePicker from 'react-multi-date-picker';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Card, CardBody, Col, Container, Row } from 'reactstrap';
 
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 import SearchModule from '../components/Search';
-import { getBinarById } from '../services/MobilApi';
+import { getDetailCars, selectDetailCars } from '../redux/features/carSlice';
+import { dateRange } from '../redux/features/dateSlice';
+// import { getBinarById } from '../services/MobilApi';
 
 function DetailSewa() {
-  const [startDate, setStartDate] = useState(new Date());
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [detailMobil, setDetailMobil] = useState();
+  const detailMobil = useSelector(selectDetailCars);
   const { binarId } = useParams();
 
-  const getDetailSewa = async () => {
-    const res = await getBinarById(binarId);
-    setDetailMobil(res.data);
+  const handleChange = (value) => {
+    dispatch(dateRange([value[0].format(), value[1].format()]));
   };
 
+  // const getDetailSewa = async () => {
+  //   const res = await getBinarById(binarId);
+  //   setDetailMobil(res.data);
+  // };
+
   useEffect(() => {
-    getDetailSewa();
-  }, []);
+    dispatch(getDetailCars(binarId));
+  }, [binarId]);
 
   if (!detailMobil) return <div>Loading...</div>;
   return (
@@ -105,11 +110,7 @@ function DetailSewa() {
                   <label htmlFor="datePicker">
                     Tentukan lama sewa mobil (max. 7 hari)
                   </label>
-                  <DatePicker
-                    id="datePicker"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                  />
+                  <DatePicker onChange={handleChange} range />
                   <br />
                   <br />
                   <Container
