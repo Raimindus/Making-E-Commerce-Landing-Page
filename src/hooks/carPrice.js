@@ -1,20 +1,42 @@
 import dayjs from 'dayjs';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { selectDetailCars } from '../redux/features/carSlice';
+import { postCars, selectDetailCars } from '../redux/features/carSlice';
 import { selectDateRange } from '../redux/features/dateSlice';
 
 const carPrice = () => {
   const dates = useSelector(selectDateRange);
   const detailMobil = useSelector(selectDetailCars);
 
-  const date1 = dayjs(dates[0]);
-  const date2 = dayjs(dates[1]);
-  const dateDiff = date2.diff(date1, 'day');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const firstDate = dayjs(dates[0])
+  const lastDate = dayjs(dates[1])
+
+  const date1 = firstDate.format('YYYY-MM-DD');
+  const date2 = lastDate.format('YYYY-MM-DD');
+  const dateDiff = lastDate.diff(firstDate, 'day');
 
   const finalPrice = dateDiff * detailMobil.price;
 
-  return { finalPrice, dates, dateDiff, detailMobil };
+  const postData = {
+    start_rent_at: date1,
+    finish_rent_at: date2,
+    car_id: detailMobil.id
+  };
+
+  const handlePost = () => {
+    try {
+      const res = dispatch(postCars(postData)).unwrap();
+      navigate(`/Pembayaran/${res.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { finalPrice, dates, dateDiff, detailMobil, handlePost };
 };
 
 export default carPrice;

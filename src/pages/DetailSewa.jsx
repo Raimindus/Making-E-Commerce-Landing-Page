@@ -1,58 +1,29 @@
 // import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Img } from 'react-image';
-import DatePicker from 'react-multi-date-picker';
+// import DatePicker from 'react-multi-date-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, CardBody, Col, Container, Row } from 'reactstrap';
+import { useParams } from 'react-router-dom';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
 import placeholderImg from '../assets/image/placeholderImg.jpg';
+import DateSaver from '../components/DatePicker';
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 import SearchModule from '../components/Search';
-import {
-  getDetailCars,
-  postCars,
-  selectDetailCars
-} from '../redux/features/carSlice';
-
-// import { getBinarById } from '../services/MobilApi';
+import carPrice from '../hooks/carPrice';
+import { getDetailCars, selectDetailCars } from '../redux/features/carSlice';
+// import { dateRange } from '../redux/features/dateSlice';
 
 function DetailSewa() {
-  const [values, setValues] = useState([]);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(values);
   const detailMobil = useSelector(selectDetailCars);
   const { binarId } = useParams();
 
-  const handleChange = (value) => {
-    // your modification on passed value ....
-    setValues(value);
-  };
-  // disini function buat post api
+  const { handlePost } = carPrice();
 
-  const date1 = '';
-  const date2 = '';
-
-  const postData = {
-    start_rent_at: date1,
-    finish_rent_at: date2,
-    car_id: detailMobil.id
-  };
-
-  const handlePost = async () => {
-    try {
-      const res = await dispatch(postCars(postData)).unwrap();
-      navigate(`/Pembayaran/${res.id}`);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // const getDetailSewa = async () => {
-  //   const res = await getBinarById(binarId);
-  //   setDetailMobil(res.data);
+  // const handleChange = (value) => {
+  //   dispatch(dateRange([value[0].format(), value[1].format()]));
   // };
 
   useEffect(() => {
@@ -138,7 +109,8 @@ function DetailSewa() {
                   <label htmlFor="datePicker">
                     Tentukan lama sewa mobil (max. 7 hari)
                   </label>
-                  <DatePicker onChange={handleChange} range />
+                  {/* <DatePicker onChange={handleChange} range /> */}
+                  <DateSaver />
                   <br />
                   <br />
                   <Container
@@ -154,7 +126,8 @@ function DetailSewa() {
                   </Container>
                   <br />
                 </div>
-                <Button
+                <button
+                  type="button"
                   className="dropdown"
                   style={{
                     width: '100%',
@@ -163,10 +136,13 @@ function DetailSewa() {
                     backgroundColor: '#5CB85F',
                     borderColor: 'transparent'
                   }}
-                  onClick={handlePost}
+                  onClick={() => {
+                    handlePost();
+                    console.log('button pressed');
+                  }}
                 >
                   Lanjutkan Pembayaran
-                </Button>
+                </button>
               </CardBody>
             </Card>
           </Col>
