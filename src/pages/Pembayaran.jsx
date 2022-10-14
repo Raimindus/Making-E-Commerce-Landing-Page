@@ -1,7 +1,6 @@
-// import dayjs from 'dayjs';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Card,
@@ -17,49 +16,27 @@ import Vector from '../assets/image/Vector.png';
 import VectorFlip from '../assets/image/VectorFlip.png';
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
+import SideBar from '../components/Sidebar';
 // import { getBinarById } from '../services/MobilApi';
 import carPrice from '../hooks/carPrice';
-import { getDetailCars, postCars} from '../redux/features/carSlice';
 // import { selectDateRange } from '../redux/features/dateSlice';
+import { getDetailOrder, selectDetailOrder } from '../redux/features/carSlice';
 
 function Pembayaran() {
   const [open, setOpen] = useState(false);
   const [close, setClose] = useState(true);
   // const dates = useSelector(selectDateRange);
-  // const detailMobil = useSelector(selectDetailCars);
-  const { binarId } = useParams();
+  const detailOrder = useSelector(selectDetailOrder);
+  const { orderId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { finalPrice, dates, dateDiff, detailMobil } = carPrice();
+  const { dateDiff, detailMobil } = carPrice();
 
-  // const date1 = dayjs(dates[0]);
-  // const date2 = dayjs(dates[1]);
-  // const dateDiff = date2.diff(date1, 'day');
-
-  // const finalPrice = dateDiff * detailMobil.price;
-
-  // const getDetailSewa = async () => {
-  //   const res = await getBinarById(binarId);
-  //   setDetailMobil(res.data);
-  // };
-  const date1 = dayjs(dates[0]).format('YYYY-MM-DD');
-  const date2 = dayjs(dates[1]).format('YYYY-MM-DD')
-
-  const postData = {
-    "start_rent_at": date1,
-    "finish_rent_at": date2,
-    "car_id": detailMobil.id
-  }
-
-  const handlePost = () => {
-    try {
-      dispatch(postCars(postData));
-      navigate(`/Konfirmasi/${detailMobil.id}`);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const firstDate = dayjs(detailOrder.start_rent_at)
+  const lastDate = dayjs(detailOrder.finish_rent_at)
+  const date1 = firstDate.format('YYYY-MM-DD');
+  const date2 = lastDate.format('YYYY-MM-DD');
 
   const handleOpen = () => {
     setClose(false);
@@ -72,13 +49,15 @@ function Pembayaran() {
   };
 
   useEffect(() => {
-    dispatch(getDetailCars(binarId));
-  }, [binarId]);
+    console.log(orderId, "testtt");
+    dispatch(getDetailOrder(orderId));
+  }, [orderId]);
 
-  if (!detailMobil) return <div>Loading...</div>;
+  if (!detailOrder) return <div>Loading...</div>;
 
   return (
     <div style={{ margin: 'auto' }}>
+      <SideBar />
       <HeaderModule />
       <div
         style={{
@@ -106,12 +85,12 @@ function Pembayaran() {
               <Col sm={3}>
                 <p>Tanggal Mulai Sewa</p>
                 <br />
-                <p>{dates[0]}</p>
+                <p>{date1}</p>
               </Col>
               <Col sm={3}>
                 <p>Tanggal Akhir Sewa</p>
                 <br />
-                <p>{dates[1]}</p>
+                <p>{date2}</p>
               </Col>
             </Row>
           </CardBody>
@@ -205,7 +184,7 @@ function Pembayaran() {
                           <img src={Vector} alt="dropdown" />
                         </a>{' '}
                       </p>
-                      <p>&nbsp; Rp. {finalPrice}</p>
+                      <p>&nbsp; Rp. {detailOrder.total_price}</p>
                     </div>
                     <p>Harga</p>
                     <ul>
@@ -219,7 +198,7 @@ function Pembayaran() {
                           <p>
                             Sewa Mobil Rp. {detailMobil.price} x {dateDiff} Hari
                           </p>
-                          Rp. {finalPrice}{' '}
+                          Rp. {detailOrder.total_price}{' '}
                         </div>
                       </li>
                     </ul>
@@ -262,7 +241,7 @@ function Pembayaran() {
                       }}
                     >
                       <p>Total &nbsp; </p>
-                      <p>&nbsp; Rp. {finalPrice}</p>
+                      <p>&nbsp; Rp. {detailOrder.total_price}</p>
                     </div>
                     <br />
                   </div>
@@ -275,12 +254,12 @@ function Pembayaran() {
                       <a href="#" type="button" onClick={handleOpen}>
                         <img src={VectorFlip} alt="dropdown" />
                       </a>{' '}
-                      &nbsp; Rp. {finalPrice}
+                      &nbsp; Rp. {detailOrder.total_price}
                     </p>
                   </div>
                 )}
                 <button
-                  onClick={handlePost}
+                  onClick={() => navigate(`/Konfirmasi/${orderId}`)}
                   type="button"
                   style={{ width: '100%' }}
                   className="button1 shadow"
