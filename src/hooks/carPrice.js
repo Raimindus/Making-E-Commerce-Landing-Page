@@ -27,9 +27,10 @@ const carPrice = () => {
     car_id: detailMobil.id
   };
 
-  const handlePost = () => {
+  const handlePost = async () => {
     try {
-      const res = dispatch(postCars(postData)).unwrap();
+      const res = await dispatch(postCars(postData)).unwrap();
+      console.log(res);
       navigate(`/Pembayaran/${res.id}`);
     } catch (error) {
       console.log(error);

@@ -13,13 +13,27 @@ export const getCustomerApi = () =>
 
 export const postCarApi = async (payload) => {
   try {
-    await tokenApi.post(
+    const res = await tokenApi.post(
       `https://bootcamp-rent-car.herokuapp.com/customer/order/`,
       payload
     );
+    return res;
   } catch (e) {
     console.error(e);
     console.log('ini error di MobilApi pas post axios');
+    return e;
+  }
+};
+
+export const getOrderApi = async (orderId) => {
+  try {
+    const res = await tokenApi.get(
+      `https://bootcamp-rent-car.herokuapp.com/customer/order/${orderId}`
+    );
+    return res;
+  } catch (e) {
+    console.error(e);
+    return e;
   }
 };
 

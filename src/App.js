@@ -36,10 +36,10 @@ function App() {
             <Route path="/CariMobil" element={<CariMobil />} />
             <Route path="/DetailSewa/:binarId" element={<DetailSewa />} />
             <Route path="/SignIn" element={<SignIn />} />
-            <Route path="/Pembayaran/:binarId" element={<Pembayaran />} />
-            <Route path="/Etiket/:binarId" element={<Etiket />} />
+            <Route path="/Pembayaran/:orderId" element={<Pembayaran />} />
+            <Route path="/Etiket/:orderId" element={<Etiket />} />
             <Route path="/SignUp" element={<SignUp />} />
-            <Route path="/Konfirmasi/:binarId" element={<Konfirmasi />} />
+            <Route path="/Konfirmasi/:orderId" element={<Konfirmasi />} />
           </Routes>
         </AuthWrapper>
       </BrowserRouter>

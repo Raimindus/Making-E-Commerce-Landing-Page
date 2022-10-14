@@ -7,6 +7,7 @@ import button_download from '../assets/image/button_download.png';
 import icon_success from '../assets/image/icon_success.png';
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
+import SideBar from '../components/Sidebar';
 
 function Etiket() {
   const [numPages, setNumPages] = useState(null);
@@ -18,6 +19,7 @@ function Etiket() {
 
   return (
     <div>
+      <SideBar/>
       <HeaderModule />
       <br />
       <br />

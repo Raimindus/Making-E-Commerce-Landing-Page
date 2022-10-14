@@ -29,11 +29,11 @@ function SignIn() {
   const handleSignUp = () => navigate('/SignUp');
 
   return (
-    <div style={{ height: '100%', overflow: 'hidden' }}>
+    <div className="signInLeft" style={{ overflow: 'hidden' }}>
       <Row>
         <Col
           lg={6}
-          style={{ height: '100%', display: 'flex', minHeight: '100vh' }}
+          style={{ display: 'flex'}}
           className="justify-content-center, align-items-center"
         >
           <div style={{ margin: 'auto', width: '370px' }}>

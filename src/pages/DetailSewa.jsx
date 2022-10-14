@@ -1,16 +1,17 @@
 // import dayjs from 'dayjs';
 import React, { useEffect } from 'react';
-import { Img } from 'react-image';
+// import { Img } from 'react-image';
 // import DatePicker from 'react-multi-date-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
-import placeholderImg from '../assets/image/placeholderImg.jpg';
+// import placeholderImg from '../assets/image/placeholderImg.jpg';
 import DateSaver from '../components/DatePicker';
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 import SearchModule from '../components/Search';
+import SideBar from '../components/Sidebar';
 import carPrice from '../hooks/carPrice';
 import { getDetailCars, selectDetailCars } from '../redux/features/carSlice';
 // import { dateRange } from '../redux/features/dateSlice';
@@ -33,6 +34,7 @@ function DetailSewa() {
   if (!detailMobil) return <div>Loading...</div>;
   return (
     <div>
+      <SideBar/>
       <HeaderModule />
       <div
         style={{
@@ -97,9 +99,9 @@ function DetailSewa() {
           <Col md={5}>
             <Card className="shadow">
               <CardBody>
-                <Img
+                <img
                   alt="detil mobil"
-                  src={[detailMobil.image, placeholderImg]}
+                  src={detailMobil.image}
                   style={{ width: '100%' }}
                 />
                 <div>
