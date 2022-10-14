@@ -37,5 +37,19 @@ export const getOrderApi = async (orderId) => {
   }
 };
 
+export const putOrderApi = async (orderId, payload) => {
+  try {
+    console.log(payload);
+    const res = await tokenApi.put(
+      `https://bootcamp-rent-car.herokuapp.com/customer/order/${orderId}`,
+      payload
+    );
+    return res;
+  } catch (e) {
+    console.error(e);
+    return e;
+  }
+};
+
 export { getBinarById };
 export { getBinarApi };

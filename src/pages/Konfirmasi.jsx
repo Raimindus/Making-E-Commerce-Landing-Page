@@ -1,18 +1,18 @@
-// import FlipCountdown from '@rumess/react-flip-countdown';
+import FlipCountdown from '@rumess/react-flip-countdown';
 import dayjs from 'dayjs';
 import React, { useEffect, useMemo, useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useDropzone } from 'react-dropzone';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 import SideBar from '../components/Sidebar';
-// import getIDAbbrFromInternationalAbbr from '../helper/getIDAbbrFromInternationalAbbr';
-// import carPrice from '../hooks/carPrice';
+import getIDAbbrFromInternationalAbbr from '../helper/getIDAbbrFromInternationalAbbr';
+import carPrice from '../hooks/carPrice';
 import { getDetailOrder, selectDetailOrder } from '../redux/features/carSlice';
 // import { getBinarById } from '../services/MobilApi';
 
@@ -82,16 +82,17 @@ function Konfirmasi() {
   // for dropzone
   const [files, setFiles] = useState([]);
   const { orderId } = useParams();
-  const navigate = useNavigate();
   const [bayar, setBayar] = useState(true);
   const [konfirm, setKonfirm] = useState(false);
   const dispatch = useDispatch();
 
-  // const { finalPrice } = carPrice();
+  const { handlePut } = carPrice();
   const dates = dayjs(detailOrder.createdAt);
   console.log(dates);
-  // const newDate = dates.add(1, 'day')
-  // const tenDate = dates.add(10, 'minute');
+  const newDate = dayjs(dates).add(1, 'day').format();
+  const tenDate = dayjs(dates).add(10, 'minute').format();
+  console.log(newDate);
+  console.log(tenDate);
 
   // also for dropzone
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
@@ -164,14 +165,14 @@ function Konfirmasi() {
                   <Col sm={8}>
                     <p className="dropdown">Selesaikan Pembayaran Sebelum</p>
                     <p>
-                      {/* {dayjs.tz(newDate).format('dddd, DD MMMM YYYY [jam] HH:mm ')}
+                      {dayjs.tz(newDate).format('dddd, DD MMMM YYYY [jam] HH:mm ')}
                       {getIDAbbrFromInternationalAbbr(
                         dayjs.tz(newDate).format('z')
-                      )} */}
+                      )}
                     </p>
                   </Col>
                   <Col sm={4}>
-                    {/* <FlipCountdown
+                    <FlipCountdown
                       size="small"
                       hideYear
                       hideMonth
@@ -181,7 +182,7 @@ function Konfirmasi() {
                       minuteTitle="menit"
                       secondTitle="detik"
                       endAt={newDate} // Date/Time
-                    /> */}
+                    />
                   </Col>
                 </Row>
               </CardBody>
@@ -278,7 +279,7 @@ function Konfirmasi() {
               {konfirm && (
                 <CardBody>
                   <p>Konfirmasi Pembayaran</p>
-                  {/* <FlipCountdown
+                  <FlipCountdown
                     size="small"
                     hideYear
                     hideMonth
@@ -289,7 +290,7 @@ function Konfirmasi() {
                     minuteTitle="menit"
                     secondTitle="detik"
                     endAt={tenDate} // Date/Time
-                  /> */}
+                  />
                   <br />
                   Terima kasih telah melakukan konfirmasi pembayaran.
                   Pembayaranmu akan segera kami cek tunggu kurang lebih 10 menit
@@ -315,7 +316,7 @@ function Konfirmasi() {
                   <br />
                   <button
                     onClick={() => {
-                      navigate(`/Etiket/${detailOrder.id}`);
+                      handlePut();
                     }}
                     type="button"
                     style={{ width: '100%' }}

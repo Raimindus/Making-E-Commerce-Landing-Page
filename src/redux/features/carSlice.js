@@ -4,7 +4,8 @@ import {
   getBinarById,
   getCustomerApi,
   getOrderApi,
-  postCarApi
+  postCarApi,
+  putOrderApi
 } from '../../services/MobilApi';
 
 export const getCustomers = createAsyncThunk('cars/getCustomers', async () => {
@@ -34,12 +35,22 @@ export const postCars = createAsyncThunk('cars/postCars', async (data) => {
   return res.data;
 });
 
+export const putOrder = createAsyncThunk(
+  'cars/putOrder',
+  async ({ orderId, payload }) => {
+    const res = await putOrderApi(orderId, payload);
+    return res.data;
+  }
+);
+
 const initialState = {
   cars: {},
   detailOrder: {},
+  putDetail: {},
   carsStatus: 'idle',
   postCarsStatus: 'idle',
-  detailOrderStatus: 'idle'
+  detailOrderStatus: 'idle',
+  putOrderStatus: 'idle'
 };
 
 export const carSlice = createSlice({
@@ -85,6 +96,19 @@ export const carSlice = createSlice({
     [getDetailOrder.rejected]: (state) => ({
       ...state,
       detailOrderStatus: 'failed'
+    }),
+    [putOrder.pending]: (state) => ({
+      ...state,
+      putOrderStatus: 'loading'
+    }),
+    [putOrder.fulfilled]: (state, action) => ({
+      ...state,
+      putOrderStatus: 'success',
+      putDetail: action.payload
+    }),
+    [putOrder.rejected]: (state) => ({
+      ...state,
+      putOrderStatus: 'failed'
     })
   }
 });
