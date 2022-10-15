@@ -1,30 +1,30 @@
+// import dayjs from 'dayjs';
 import React, { useEffect } from 'react';
-import DatePicker from 'react-multi-date-picker';
+// import { Img } from 'react-image';
+// import DatePicker from 'react-multi-date-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, CardBody, Col, Container, Row } from 'reactstrap';
+import { useParams } from 'react-router-dom';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
+// import placeholderImg from '../assets/image/placeholderImg.jpg';
+import DateSaver from '../components/DatePicker';
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 import SearchModule from '../components/Search';
+import SideBar from '../components/Sidebar';
+import carPrice from '../hooks/carPrice';
 import { getDetailCars, selectDetailCars } from '../redux/features/carSlice';
-import { dateRange } from '../redux/features/dateSlice';
-// import { getBinarById } from '../services/MobilApi';
+// import { dateRange } from '../redux/features/dateSlice';
 
 function DetailSewa() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const detailMobil = useSelector(selectDetailCars);
   const { binarId } = useParams();
 
-  const handleChange = (value) => {
-    dispatch(dateRange([value[0].format(), value[1].format()]));
-  };
+  const { handlePost } = carPrice();
 
-  // const getDetailSewa = async () => {
-  //   const res = await getBinarById(binarId);
-  //   setDetailMobil(res.data);
+  // const handleChange = (value) => {
+  //   dispatch(dateRange([value[0].format(), value[1].format()]));
   // };
 
   useEffect(() => {
@@ -34,6 +34,7 @@ function DetailSewa() {
   if (!detailMobil) return <div>Loading...</div>;
   return (
     <div>
+      <SideBar/>
       <HeaderModule />
       <div
         style={{
@@ -110,7 +111,8 @@ function DetailSewa() {
                   <label htmlFor="datePicker">
                     Tentukan lama sewa mobil (max. 7 hari)
                   </label>
-                  <DatePicker onChange={handleChange} range />
+                  {/* <DatePicker onChange={handleChange} range /> */}
+                  <DateSaver />
                   <br />
                   <br />
                   <Container
@@ -126,7 +128,8 @@ function DetailSewa() {
                   </Container>
                   <br />
                 </div>
-                <Button
+                <button
+                  type="button"
                   className="dropdown"
                   style={{
                     width: '100%',
@@ -136,11 +139,12 @@ function DetailSewa() {
                     borderColor: 'transparent'
                   }}
                   onClick={() => {
-                    navigate(`/Pembayaran/${detailMobil.id}`);
+                    handlePost();
+                    console.log('button pressed');
                   }}
                 >
                   Lanjutkan Pembayaran
-                </Button>
+                </button>
               </CardBody>
             </Card>
           </Col>

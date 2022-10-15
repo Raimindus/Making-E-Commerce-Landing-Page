@@ -4,14 +4,17 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useDropzone } from 'react-dropzone';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
+import SideBar from '../components/Sidebar';
 import getIDAbbrFromInternationalAbbr from '../helper/getIDAbbrFromInternationalAbbr';
 import carPrice from '../hooks/carPrice';
-import { getBinarById } from '../services/MobilApi';
+import { getDetailOrder, selectDetailOrder } from '../redux/features/carSlice';
+// import { getBinarById } from '../services/MobilApi';
 
 const baseStyle = {
   flex: 1,
@@ -73,22 +76,25 @@ const img = {
 };
 
 function Konfirmasi() {
+  // for data showing
+  const detailOrder = useSelector(selectDetailOrder);
+
+  // for dropzone
   const [files, setFiles] = useState([]);
-  const [detailMobil, setDetailMobil] = useState();
-  const { binarId } = useParams();
-  const navigate = useNavigate();
+  const { orderId } = useParams();
   const [bayar, setBayar] = useState(true);
   const [konfirm, setKonfirm] = useState(false);
+  const dispatch = useDispatch();
 
-  const { finalPrice } = carPrice();
-  // const date = '2022-09-01T12:54:11.277Z';
-  const date = new Date();
-  const newDate = date.setDate(date.getDate() + 1);
-  const tenDate = date.setMinutes(date.getMinutes() + 10);
+  const { handlePut } = carPrice();
+  const dates = dayjs(detailOrder.createdAt);
+  console.log(dates);
+  const newDate = dayjs(dates).add(1, 'day').format();
+  const tenDate = dayjs(dates).add(10, 'minute').format();
   console.log(newDate);
   console.log(tenDate);
-  console.log(date);
 
+  // also for dropzone
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
     useDropzone({
       accept: {
@@ -132,25 +138,23 @@ function Konfirmasi() {
     [isFocused, isDragAccept, isDragReject]
   );
 
-  const getDetailSewa = async () => {
-    const res = await getBinarById(binarId);
-    setDetailMobil(res.data);
-  };
-
+  // for UI state
   const handleClick = () => {
     // 👇️ toggle shown state
     setKonfirm(true);
     setBayar(false);
   };
 
+  // for data showing
   useEffect(() => {
-    getDetailSewa();
-  }, []);
+    dispatch(getDetailOrder(orderId));
+  }, [orderId]);
 
-  if (!detailMobil) return <div>Loading...</div>;
+  if (!detailOrder) return <div>Loading...</div>;
 
   return (
     <div style={{ margin: 'auto' }}>
+      <SideBar />
       <HeaderModule />
       <Container style={{ marginTop: '50px' }}>
         <Row>
@@ -161,9 +165,9 @@ function Konfirmasi() {
                   <Col sm={8}>
                     <p className="dropdown">Selesaikan Pembayaran Sebelum</p>
                     <p>
-                      {dayjs.tz(date).format('dddd, DD MMMM YYYY [jam] HH:mm ')}
+                      {dayjs.tz(newDate).format('dddd, DD MMMM YYYY [jam] HH:mm ')}
                       {getIDAbbrFromInternationalAbbr(
-                        dayjs.tz(date).format('z')
+                        dayjs.tz(newDate).format('z')
                       )}
                     </p>
                   </Col>
@@ -208,7 +212,7 @@ function Konfirmasi() {
                 <div>54104257877</div>
                 <br />
                 Total Bayar
-                <div>Rp. {finalPrice}</div>
+                <div>Rp.{detailOrder.total_price}</div>
               </CardBody>
             </Card>
             <br />
@@ -312,7 +316,7 @@ function Konfirmasi() {
                   <br />
                   <button
                     onClick={() => {
-                      navigate(`/Etiket/${detailMobil.id}`);
+                      handlePut();
                     }}
                     type="button"
                     style={{ width: '100%' }}
