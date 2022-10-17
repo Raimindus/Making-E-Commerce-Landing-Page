@@ -10,6 +10,7 @@ import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
+import HeaderStepper from '../components/HeaderStepper';
 import SideBar from '../components/Sidebar';
 import getIDAbbrFromInternationalAbbr from '../helper/getIDAbbrFromInternationalAbbr';
 import carPrice from '../hooks/carPrice';
@@ -153,6 +154,17 @@ function Konfirmasi() {
     <div style={{ margin: 'auto' }}>
       <SideBar />
       <HeaderModule />
+      <div
+        style={{
+          height: '130px',
+          backgroundColor: '#F1F3FF',
+          position: 'relative',
+          zIndex: '-2'
+        }}
+      >
+        <br />
+        <HeaderStepper active={1} orderID={orderId} />
+      </div>
       <Container style={{ marginTop: '50px' }}>
         <Row>
           <Col md={7}>

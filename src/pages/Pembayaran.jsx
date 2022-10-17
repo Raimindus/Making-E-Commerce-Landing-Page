@@ -16,6 +16,7 @@ import Vector from '../assets/image/Vector.png';
 import VectorFlip from '../assets/image/VectorFlip.png';
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
+import HeaderStepper from '../components/HeaderStepper';
 import SideBar from '../components/Sidebar';
 // import { getBinarById } from '../services/MobilApi';
 import carPrice from '../hooks/carPrice';
@@ -33,8 +34,8 @@ function Pembayaran() {
 
   const { dateDiff, detailMobil } = carPrice();
 
-  const firstDate = dayjs(detailOrder.start_rent_at)
-  const lastDate = dayjs(detailOrder.finish_rent_at)
+  const firstDate = dayjs(detailOrder.start_rent_at);
+  const lastDate = dayjs(detailOrder.finish_rent_at);
   const date1 = firstDate.format('YYYY-MM-DD');
   const date2 = lastDate.format('YYYY-MM-DD');
 
@@ -49,7 +50,7 @@ function Pembayaran() {
   };
 
   useEffect(() => {
-    console.log(orderId, "testtt");
+    console.log(orderId, 'testtt');
     dispatch(getDetailOrder(orderId));
   }, [orderId]);
 
@@ -61,12 +62,15 @@ function Pembayaran() {
       <HeaderModule />
       <div
         style={{
-          height: '200px',
+          height: '180px',
           backgroundColor: '#F1F3FF',
           position: 'relative',
           zIndex: '-2'
         }}
-      />
+      >
+        <br />
+        <HeaderStepper active={0} orderID={orderId} />
+      </div>
       <Container style={{ marginTop: '-50px' }}>
         <Card>
           <CardBody>
