@@ -88,11 +88,8 @@ function Konfirmasi() {
 
   const { handlePut } = carPrice();
   const dates = dayjs(detailOrder.createdAt);
-  console.log(dates);
   const newDate = dayjs(dates).add(1, 'day').format();
   const tenDate = dayjs(dates).add(10, 'minute').format();
-  console.log(newDate);
-  console.log(tenDate);
 
   // also for dropzone
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =

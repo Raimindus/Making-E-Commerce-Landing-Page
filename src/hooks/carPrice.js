@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   postCars,
@@ -70,7 +70,16 @@ const carPrice = () => {
     }
   };
 
-  return { finalPrice, dates, dateDiff, detailMobil, handlePost, handlePut };
+  const location = useLocation();
+
+  const authRedirect = () => {
+    const authData = JSON.parse(localStorage.getItem('auth'));
+    if (!authData?.access_token) {
+      navigate(`/SignIn?redirect_url=${location.pathname}`);
+    }
+  }
+
+  return { finalPrice, dates, dateDiff, detailMobil, handlePost, handlePut, authRedirect };
 };
 
 export default carPrice;
