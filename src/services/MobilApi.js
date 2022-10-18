@@ -3,19 +3,19 @@ import axios from 'axios';
 import tokenApi from './tokenApi';
 
 const getBinarApi = () =>
-  axios.get('https://bootcamp-rent-car.herokuapp.com/admin/car');
+  axios.get('https://bootcamp-rent-cars.herokuapp.com/customer/car');
 
 const getBinarById = (binarId) =>
-  axios.get(`https://bootcamp-rent-car.herokuapp.com/admin/car/${binarId}`);
+  axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/car/${binarId}`);
 
 export const getCustomerApi = () =>
-  axios.get('https://bootcamp-rent-car.herokuapp.com/customer');
+  axios.get('https://bootcamp-rent-cars.herokuapp.com/customer');
 
 export const postCarApi = async (payload) => {
   try {
     const res = await tokenApi.post(
-      `https://bootcamp-rent-car.herokuapp.com/customer/order/`,
-      payload
+      `https://bootcamp-rent-cars.herokuapp.com/customer/order/`, 
+      payload, {headers:{"Content-Type": "multipart/form-data"}}
     );
     return res;
   } catch (e) {
@@ -28,7 +28,7 @@ export const postCarApi = async (payload) => {
 export const getOrderApi = async (orderId) => {
   try {
     const res = await tokenApi.get(
-      `https://bootcamp-rent-car.herokuapp.com/customer/order/${orderId}`
+      `https://bootcamp-rent-cars.herokuapp.com/customer/order/${orderId}`
     );
     return res;
   } catch (e) {
@@ -41,7 +41,7 @@ export const putOrderApi = async (orderId, payload) => {
   try {
     console.log(payload);
     const res = await tokenApi.put(
-      `https://bootcamp-rent-car.herokuapp.com/customer/order/${orderId}`,
+      `https://bootcamp-rent-cars.herokuapp.com/customer/order/${orderId}/slip`,
       payload
     );
     return res;

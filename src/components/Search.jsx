@@ -137,13 +137,12 @@ function SearchModule(props) {
           <Row>
             {binar.map((car) => (
               <Col lg={4} key={car.id}>
-                <Card style={{ height: '478px' }} className="mb-4">
+                <Card style={{ height: '478px' }} className="mb-4 carCard">
                   <img
                     alt="Car"
                     src={car.image}
                     top
-                    width="100%"
-                    style={{ paddingBottom: '0px'}}
+                    style={{ paddingBottom: '0px', objectFit:'cover', maxHeight:'270px'}}
                   />
                   <CardBody className="shadow pb-0">
                     <CardTitle className="headertext" tag="h5">

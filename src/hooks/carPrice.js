@@ -28,8 +28,6 @@ const carPrice = () => {
     car_id: carId
   };
 
-  console.log(putData);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,7 +36,7 @@ const carPrice = () => {
 
   const date1 = firstDate.format('YYYY-MM-DD');
   const date2 = lastDate.format('YYYY-MM-DD');
-  const dateDiff = lastDate.diff(firstDate, 'day');
+  const dateDiff = lastDate.diff(firstDate, 'day') + 1;
 
   const finalPrice = dateDiff * detailMobil.price;
 
@@ -58,6 +56,7 @@ const carPrice = () => {
     }
   };
 
+  // ini kupindahin ke konfirmasi
   const handlePut = async () => {
     try {
       const response = await dispatch(

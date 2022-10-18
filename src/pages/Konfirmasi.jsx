@@ -5,7 +5,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useDropzone } from 'react-dropzone';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 
 import FooterModule from '../components/Footer';
@@ -13,8 +13,12 @@ import HeaderModule from '../components/Header';
 import HeaderStepper from '../components/HeaderStepper';
 import SideBar from '../components/Sidebar';
 import getIDAbbrFromInternationalAbbr from '../helper/getIDAbbrFromInternationalAbbr';
-import carPrice from '../hooks/carPrice';
-import { getDetailOrder, selectDetailOrder } from '../redux/features/carSlice';
+// import carPrice from '../hooks/carPrice';
+import {
+  getDetailOrder,
+  putOrder,
+  selectDetailOrder
+} from '../redux/features/carSlice';
 // import { getBinarById } from '../services/MobilApi';
 
 const baseStyle = {
@@ -77,6 +81,7 @@ const img = {
 };
 
 function Konfirmasi() {
+  const navigate = useNavigate();
   // for data showing
   const detailOrder = useSelector(selectDetailOrder);
 
@@ -87,7 +92,7 @@ function Konfirmasi() {
   const [konfirm, setKonfirm] = useState(false);
   const dispatch = useDispatch();
 
-  const { handlePut } = carPrice();
+  // const { handlePut } = carPrice();
   const dates = dayjs(detailOrder.createdAt);
   const newDate = dayjs(dates).add(1, 'day').format();
   const tenDate = dayjs(dates).add(10, 'minute').format();
@@ -95,6 +100,7 @@ function Konfirmasi() {
   // also for dropzone
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
     useDropzone({
+      maxFiles: 1,
       accept: {
         'image/jpeg': [],
         'image/png': []
@@ -125,6 +131,21 @@ function Konfirmasi() {
       </div>
     </div>
   ));
+
+  const bodyFormData = new FormData();
+  bodyFormData.append('slip', files[0])
+
+  const handlePut = async () => {
+    try {
+      const response = await dispatch(
+        putOrder({ orderId, payload: bodyFormData })
+      ).unwrap();
+      console.log(response);
+      navigate(`/Etiket/${response.id}`);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const style = useMemo(
     () => ({
@@ -174,7 +195,9 @@ function Konfirmasi() {
                   <Col sm={8}>
                     <p className="dropdown">Selesaikan Pembayaran Sebelum</p>
                     <p>
-                      {dayjs.tz(newDate).format('dddd, DD MMMM YYYY [jam] HH:mm ')}
+                      {dayjs
+                        .tz(newDate)
+                        .format('dddd, DD MMMM YYYY [jam] HH:mm ')}
                       {getIDAbbrFromInternationalAbbr(
                         dayjs.tz(newDate).format('z')
                       )}
