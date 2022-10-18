@@ -24,9 +24,9 @@ function SearchModule(props) {
     GetMobil();
 
   const options = [
-    { value: '2 - 4 orang', label: '2 - 4 orang' },
-    { value: '4 - 6 orang', label: '4 - 6 orang' },
-    { value: '6 - 8 orang', label: '6 - 8 orang' }
+    { value: 'small', label: '2 - 4 orang' },
+    { value: 'medium', label: '4 - 6 orang' },
+    { value: 'large', label: '6 - 8 orang' }
   ];
 
   const harga = [
