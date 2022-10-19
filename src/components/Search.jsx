@@ -24,9 +24,9 @@ function SearchModule(props) {
     GetMobil();
 
   const options = [
-    { value: '2 - 4 orang', label: '2 - 4 orang' },
-    { value: '4 - 6 orang', label: '4 - 6 orang' },
-    { value: '6 - 8 orang', label: '6 - 8 orang' }
+    { value: 'small', label: '2 - 4 orang' },
+    { value: 'medium', label: '4 - 6 orang' },
+    { value: 'large', label: '6 - 8 orang' }
   ];
 
   const harga = [
@@ -137,13 +137,12 @@ function SearchModule(props) {
           <Row>
             {binar.map((car) => (
               <Col lg={4} key={car.id}>
-                <Card style={{ height: '478px' }} className="mb-4">
+                <Card style={{ height: '478px' }} className="mb-4 carCard">
                   <img
                     alt="Car"
                     src={car.image}
                     top
-                    width="100%"
-                    style={{ paddingBottom: '0px'}}
+                    style={{ paddingBottom: '0px', objectFit:'cover', maxHeight:'270px'}}
                   />
                   <CardBody className="shadow pb-0">
                     <CardTitle className="headertext" tag="h5">

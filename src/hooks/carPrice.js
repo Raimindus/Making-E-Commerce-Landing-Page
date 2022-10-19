@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   postCars,
@@ -28,8 +28,6 @@ const carPrice = () => {
     car_id: carId
   };
 
-  console.log(putData);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,7 +36,7 @@ const carPrice = () => {
 
   const date1 = firstDate.format('YYYY-MM-DD');
   const date2 = lastDate.format('YYYY-MM-DD');
-  const dateDiff = lastDate.diff(firstDate, 'day');
+  const dateDiff = lastDate.diff(firstDate, 'day') + 1;
 
   const finalPrice = dateDiff * detailMobil.price;
 
@@ -58,6 +56,7 @@ const carPrice = () => {
     }
   };
 
+  // ini kupindahin ke konfirmasi
   const handlePut = async () => {
     try {
       const response = await dispatch(
@@ -70,7 +69,16 @@ const carPrice = () => {
     }
   };
 
-  return { finalPrice, dates, dateDiff, detailMobil, handlePost, handlePut };
+  const location = useLocation();
+
+  const authRedirect = () => {
+    const authData = JSON.parse(localStorage.getItem('auth'));
+    if (!authData?.access_token) {
+      navigate(`/SignIn?redirect_url=${location.pathname}`);
+    }
+  }
+
+  return { finalPrice, dates, dateDiff, detailMobil, handlePost, handlePut, authRedirect };
 };
 
 export default carPrice;

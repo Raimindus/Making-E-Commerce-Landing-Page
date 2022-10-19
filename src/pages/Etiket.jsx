@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5';
+import { useParams } from 'react-router-dom';
 import { Card, CardBody, Container } from 'reactstrap';
 
 import BinarPdf from '../assets/BinarPdf.pdf';
@@ -7,6 +8,7 @@ import button_download from '../assets/image/button_download.png';
 import icon_success from '../assets/image/icon_success.png';
 import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
+import HeaderStepper from '../components/HeaderStepper';
 import SideBar from '../components/Sidebar';
 
 function Etiket() {
@@ -16,11 +18,23 @@ function Etiket() {
     setNumPages(pages);
     setPageNumber(1);
   };
+  const { orderId } = useParams();
 
   return (
     <div>
       <SideBar/>
       <HeaderModule />
+      <div
+        style={{
+          height: '130px',
+          backgroundColor: '#F1F3FF',
+          position: 'relative',
+          zIndex: '-2'
+        }}
+      >
+        <br />
+        <HeaderStepper active={2} orderID={orderId} />
+      </div>
       <br />
       <br />
       <Container>

@@ -21,7 +21,7 @@ function DetailSewa() {
   const detailMobil = useSelector(selectDetailCars);
   const { binarId } = useParams();
 
-  const { handlePost } = carPrice();
+  const { handlePost, authRedirect } = carPrice();
 
   // const handleChange = (value) => {
   //   dispatch(dateRange([value[0].format(), value[1].format()]));
@@ -139,6 +139,7 @@ function DetailSewa() {
                     borderColor: 'transparent'
                   }}
                   onClick={() => {
+                    authRedirect();
                     handlePost();
                     console.log('button pressed');
                   }}

@@ -492,7 +492,6 @@ li {
   .searchbar {
     height:330px;
     padding:10px;
-    margin:10px;
   }
 }
 
@@ -503,4 +502,10 @@ button:disabled {
 
 input:disabled {
   background-color: #d0d0d0;
+}
+
+@media only screen and (max-width: 1300px) {
+  .carCard {
+    margin:10px;
+  }
 }

@@ -49,7 +49,7 @@ function SignUp() {
               onSubmit={async (value) => {
                 try {
                   const res = await axios.post(
-                    "https://bootcamp-rent-car.herokuapp.com/customer/auth/register",
+                    "https://bootcamp-rent-cars.herokuapp.com/customer/auth/register",
                     value
                   );
 
