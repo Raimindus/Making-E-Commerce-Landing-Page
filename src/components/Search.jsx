@@ -14,6 +14,7 @@ import {
   Row
 } from 'reactstrap';
 
+import formatter from '../helper/currency';
 import GetMobil from '../hooks/getMobil';
 
 function SearchModule(props) {
@@ -142,7 +143,11 @@ function SearchModule(props) {
                     alt="Car"
                     src={car.image}
                     top
-                    style={{ paddingBottom: '0px', objectFit:'cover', maxHeight:'270px'}}
+                    style={{
+                      paddingBottom: '0px',
+                      objectFit: 'cover',
+                      maxHeight: '270px'
+                    }}
                   />
                   <CardBody className="shadow pb-0">
                     <CardTitle className="headertext" tag="h5">
@@ -152,7 +157,7 @@ function SearchModule(props) {
                       className="mb-2 text-muted cardsubtitle"
                       tag="h6"
                     >
-                      Rp. {car.price} / hari
+                      {formatter.format(car.price)} / hari
                     </CardSubtitle>
                     <CardText className="dropdown">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,

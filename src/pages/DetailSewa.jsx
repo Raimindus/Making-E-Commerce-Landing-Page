@@ -12,6 +12,7 @@ import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 import SearchModule from '../components/Search';
 import SideBar from '../components/Sidebar';
+import formatter from '../helper/currency';
 import carPrice from '../hooks/carPrice';
 import { getDetailCars, selectDetailCars } from '../redux/features/carSlice';
 // import { dateRange } from '../redux/features/dateSlice';
@@ -123,7 +124,7 @@ function DetailSewa() {
                       <p>Total</p>
                     </div>
                     <div>
-                      <p>Rp. {detailMobil.price}</p>
+                      <p>{formatter.format(detailMobil.price)}</p>
                     </div>
                   </Container>
                   <br />

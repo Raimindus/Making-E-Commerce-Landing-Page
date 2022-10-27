@@ -22,7 +22,7 @@ function Etiket() {
 
   return (
     <div>
-      <SideBar/>
+      <SideBar />
       <HeaderModule />
       <div
         style={{
@@ -55,7 +55,9 @@ function Etiket() {
                 <p>*no invoice</p>
               </div>
               <div>
-                <img src={button_download} alt="download" />
+                <a href={BinarPdf} download>
+                  <img src={button_download} alt="download" />
+                </a>
               </div>
             </Container>
             <div>

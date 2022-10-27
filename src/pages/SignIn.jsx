@@ -9,6 +9,7 @@ import { Col, FormGroup, Input, Label } from 'reactstrap';
 import * as Yup from 'yup';
 
 import LoginRight from '../components/LoginRight';
+import tokenApi from '../services/tokenApi';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Email tidak valid'),
@@ -33,7 +34,7 @@ function SignIn() {
       <Row>
         <Col
           lg={6}
-          style={{ display: 'flex'}}
+          style={{ display: 'flex' }}
           className="justify-content-center, align-items-center"
         >
           <div style={{ margin: 'auto', width: '370px' }}>
@@ -58,6 +59,8 @@ function SignIn() {
                   );
 
                   localStorage.setItem('auth', JSON.stringify(res.data));
+                  
+                  tokenApi.defaults.headers.common.access_token = res.data.access_token
 
                   if (Url) {
                     navigate(`${Url}`);
@@ -91,6 +94,7 @@ function SignIn() {
                     <Input
                       id="examplePassword"
                       name="password"
+                      type="password"
                       placeholder="6+ karakter"
                       value={formikProps.values.password}
                       onChange={formikProps.handleChange}

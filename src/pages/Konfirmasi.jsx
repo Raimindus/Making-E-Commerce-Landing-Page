@@ -12,6 +12,7 @@ import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 import HeaderStepper from '../components/HeaderStepper';
 import SideBar from '../components/Sidebar';
+import formatter from '../helper/currency';
 import getIDAbbrFromInternationalAbbr from '../helper/getIDAbbrFromInternationalAbbr';
 // import carPrice from '../hooks/carPrice';
 import {
@@ -244,7 +245,7 @@ function Konfirmasi() {
                 <div>54104257877</div>
                 <br />
                 Total Bayar
-                <div>Rp.{detailOrder.total_price}</div>
+                <div>{formatter.format(detailOrder.total_price)}</div>
               </CardBody>
             </Card>
             <br />

@@ -18,6 +18,7 @@ import FooterModule from '../components/Footer';
 import HeaderModule from '../components/Header';
 import HeaderStepper from '../components/HeaderStepper';
 import SideBar from '../components/Sidebar';
+import formatter from '../helper/currency';
 // import { getBinarById } from '../services/MobilApi';
 import carPrice from '../hooks/carPrice';
 // import { selectDateRange } from '../redux/features/dateSlice';
@@ -50,7 +51,6 @@ function Pembayaran() {
   };
 
   useEffect(() => {
-    console.log(orderId, 'testtt');
     dispatch(getDetailOrder(orderId));
   }, [orderId]);
 
@@ -188,7 +188,7 @@ function Pembayaran() {
                           <img src={Vector} alt="dropdown" />
                         </a>{' '}
                       </p>
-                      <p>&nbsp; Rp. {detailOrder.total_price}</p>
+                      <p>&nbsp; {formatter.format(detailOrder.total_price)}</p>
                     </div>
                     <p>Harga</p>
                     <ul>
@@ -200,9 +200,9 @@ function Pembayaran() {
                           }}
                         >
                           <p>
-                            Sewa Mobil Rp. {detailMobil.price} x {dateDiff} Hari
+                            Sewa Mobil {formatter.format(detailMobil.price)} x {dateDiff} Hari
                           </p>
-                          Rp. {detailOrder.total_price}{' '}
+                          {formatter.format(detailOrder.total_price)}
                         </div>
                       </li>
                     </ul>
@@ -245,7 +245,7 @@ function Pembayaran() {
                       }}
                     >
                       <p>Total &nbsp; </p>
-                      <p>&nbsp; Rp. {detailOrder.total_price}</p>
+                      <p>&nbsp;{formatter.format(detailOrder.total_price)}</p>
                     </div>
                     <br />
                   </div>
@@ -254,11 +254,11 @@ function Pembayaran() {
                   <div>
                     {' '}
                     <p>
-                      Total &nbsp;{' '}
+                      Total &nbsp;{formatter.format(detailOrder.total_price)}&nbsp;&nbsp;
                       <a href="#" type="button" onClick={handleOpen}>
                         <img src={VectorFlip} alt="dropdown" />
                       </a>{' '}
-                      &nbsp; Rp. {detailOrder.total_price}
+                      &nbsp; 
                     </p>
                   </div>
                 )}
