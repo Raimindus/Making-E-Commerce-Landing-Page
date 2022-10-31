@@ -242,7 +242,7 @@ describe('SearchCars', () => {
 
   // Ngetes filter setelah render api
   test('should remove Toyota Rush from view when filtering price', async () => {
-    const { getByText, findByText } = renderWithProviders(
+    const { getByText, queryByText, debug } = renderWithProviders(
       <BrowserRouter>
         <Routes>
           <Route path="*" element={<SearchModule />} />
@@ -259,7 +259,9 @@ describe('SearchCars', () => {
 
     fireEvent.click(getByText('Cari Mobil'));
 
+    debug();
+
     // expect Toyota Rush to be removed from view
-    await waitFor(() => expect(findByText('Toyota Rush')).not.toBeVisible());
+    await waitFor(() => expect(queryByText('Toyota Rush')).toBeNull());
   });
 });
