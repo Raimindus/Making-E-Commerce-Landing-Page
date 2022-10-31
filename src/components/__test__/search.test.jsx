@@ -1,4 +1,4 @@
-import { fireEvent, getByLabelText, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import React from 'react';
@@ -13,8 +13,8 @@ const handlers = [
     'https://bootcamp-rent-cars.herokuapp.com/customer/car',
     (req, res, ctx) =>
       res(
-        ctx.json(
-          [{
+        ctx.json([
+          {
             id: 338,
             name: 'afgddgasg',
             category: 'large',
@@ -206,8 +206,8 @@ const handlers = [
               'https://firebasestorage.googleapis.com/v0/b/km-sib-2---secondhand.appspot.com/o/cars%2F1666788916817-toyota.png?alt=media',
             createdAt: '2022-10-26T12:55:16.818Z',
             updatedAt: '2022-10-30T09:21:36.698Z'
-          }]
-        ),
+          }
+        ]),
         ctx.delay(150)
       )
   )
@@ -252,11 +252,14 @@ describe('SearchCars', () => {
     await waitFor(() => fireEvent.click(getByText('Cari Mobil')));
     await waitFor(() => expect(getByText('Toyota Rush')).toBeVisible());
 
-    await selectEvent.select(getByText('Masukan harga sewa perhari'), 'Rp.400.000-Rp.600.000');
+    await selectEvent.select(
+      getByText('Masukan harga sewa perhari'),
+      '> Rp.600.000'
+    );
 
-    await waitFor(() => fireEvent.click(getByText('Cari Mobil')));
+    fireEvent.click(getByText('Cari Mobil'));
 
     // expect Toyota Rush to be removed from view
-    await waitFor(() => expect(getByText('Toyota Rush')).not.toBeVisible());
+    await waitFor(() => expect(findByText('Toyota Rush')).not.toBeVisible());
   });
 });
