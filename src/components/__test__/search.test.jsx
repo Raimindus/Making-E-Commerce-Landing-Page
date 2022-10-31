@@ -1,4 +1,4 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, getByLabelText, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import React from 'react';
@@ -14,7 +14,7 @@ const handlers = [
     (req, res, ctx) =>
       res(
         ctx.json(
-          {
+          [{
             id: 338,
             name: 'afgddgasg',
             category: 'large',
@@ -206,7 +206,7 @@ const handlers = [
               'https://firebasestorage.googleapis.com/v0/b/km-sib-2---secondhand.appspot.com/o/cars%2F1666788916817-toyota.png?alt=media',
             createdAt: '2022-10-26T12:55:16.818Z',
             updatedAt: '2022-10-30T09:21:36.698Z'
-          }
+          }]
         ),
         ctx.delay(150)
       )
@@ -234,8 +234,7 @@ describe('SearchCars', () => {
         </Routes>
       </BrowserRouter>
     );
-    const btn = getByText('Cari Mobil');
-    fireEvent.click(btn);
+    await waitFor(() => fireEvent.click(getByText('Cari Mobil')));
     await waitFor(() => expect(getByText('Toyota Rush')).toBeVisible());
     const harga = getByText('Rp 250.000,00 / hari');
     expect(harga).toBeVisible();
@@ -250,17 +249,12 @@ describe('SearchCars', () => {
         </Routes>
       </BrowserRouter>
     );
-
-    const rush = await findByText('Toyota Rush');
-    expect(rush).toBeVisible();
+    await waitFor(() => fireEvent.click(getByText('Cari Mobil')));
     await waitFor(() => expect(getByText('Toyota Rush')).toBeVisible());
 
-    const selectPrice = getByText('Masukkan harga sewa perhari');
+    await selectEvent.select(getByText('Masukan harga sewa perhari'), 'Rp.400.000-Rp.600.000');
 
-    await selectEvent.select(selectPrice, 'Rp.400.000-Rp.600.000');
-
-    const btn = getByText('Cari Mobil');
-    fireEvent.click(btn);
+    await waitFor(() => fireEvent.click(getByText('Cari Mobil')));
 
     // expect Toyota Rush to be removed from view
     await waitFor(() => expect(getByText('Toyota Rush')).not.toBeVisible());
